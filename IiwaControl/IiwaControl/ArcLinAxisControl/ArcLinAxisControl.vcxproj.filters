@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{c06d02e1-aaa5-49ba-abd3-4669c606051b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1b38d4d0-0f97-4d77-9d9f-e54073a34548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT UM Files">
+      <UniqueIdentifier>{49e0723d-03db-4db5-9fbd-6ec581a9a223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT RT Files">
+      <UniqueIdentifier>{8e9896eb-5840-49a2-be75-f0f0104e134a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT OS Files">
+      <UniqueIdentifier>{86effb2a-ec6d-4a08-9420-bfde175a20c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TMC Files">
+      <UniqueIdentifier>{d1df33bd-fcda-481e-84fb-3106a8044772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LinearAxis">
+      <UniqueIdentifier>{a0a7b5b1-2f38-446c-99aa-04893a0c3aed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TcPch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcLinAxisControlClassFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcLinAxisControlInterfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcLinAxisControlServices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcLinAxisControlCtrl.h">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcLinAxisControlDriver.h">
+      <Filter>TwinCAT RT Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArcLinAxisContr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TcPch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcLinAxisControlClassFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcLinAxisControlCtrl.cpp">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcLinAxisControlW32.cpp">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcLinAxisControlDriver.cpp">
+      <Filter>TwinCAT RT Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcLinAxisControlMain.cpp">
+      <Filter>TwinCAT OS Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArcLinAxisContr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\eigen_tc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\quatutil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalC.cpp">
+      <Filter>Source Files\LinearAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalG.cpp">
+      <Filter>Source Files\LinearAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJ.cpp">
+      <Filter>Source Files\LinearAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJp.cpp">
+      <Filter>Source Files\LinearAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalM.cpp">
+      <Filter>Source Files\LinearAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalT0E.cpp">
+      <Filter>Source Files\LinearAxis</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Skew.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJpp.cpp">
+      <Filter>Source Files\LinearAxis</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ArcLinAxisControl.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="ArcLinAxisControlW32.rc">
+      <Filter>TwinCAT UM Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ArcLinAxisControlW32.def">
+      <Filter>TwinCAT UM Files</Filter>
+    </None>
+    <None Include="ArcLinAxisControl.tmc">
+      <Filter>TMC Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="ArcLinAxisControlW32.idl">
+      <Filter>TwinCAT UM Files</Filter>
+    </Midl>
+  </ItemGroup>
+</Project>
