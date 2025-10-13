@@ -2,10 +2,11 @@
 
 
 #include "ArcTcControlInterfaces.h"
-#include "arc/Robot.h"
-#include "arc/RobotStatus.h"
+#include "orc/robots/Robot.h"
+#include "orc/RobotStatus.h"
+#include "orc/com/RobotState.h"
 
-namespace arc::logic {
+namespace orc::logic {
 	class StateMachine {
 		CTcTrace* ptr_Trace;
 		Time t = 0;

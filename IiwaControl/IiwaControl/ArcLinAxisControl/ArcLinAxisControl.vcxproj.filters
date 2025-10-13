@@ -19,9 +19,6 @@
     <Filter Include="TMC Files">
       <UniqueIdentifier>{d1df33bd-fcda-481e-84fb-3106a8044772}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\LinearAxis">
-      <UniqueIdentifier>{a0a7b5b1-2f38-446c-99aa-04893a0c3aed}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -74,38 +71,11 @@
     <ClCompile Include="ArcLinAxisContr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\eigen_tc.cpp">
+    <ClCompile Include="..\..\..\orc-a\src\Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\quatutil.cpp">
+    <ClCompile Include="eigen_tc.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalC.cpp">
-      <Filter>Source Files\LinearAxis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalG.cpp">
-      <Filter>Source Files\LinearAxis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJ.cpp">
-      <Filter>Source Files\LinearAxis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJp.cpp">
-      <Filter>Source Files\LinearAxis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalM.cpp">
-      <Filter>Source Files\LinearAxis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalT0E.cpp">
-      <Filter>Source Files\LinearAxis</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Skew.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJpp.cpp">
-      <Filter>Source Files\LinearAxis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

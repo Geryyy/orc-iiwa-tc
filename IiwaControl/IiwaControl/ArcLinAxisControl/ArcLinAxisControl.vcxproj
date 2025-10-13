@@ -55,18 +55,9 @@
     <ClInclude Include="ArcLinAxisControlServices.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\lib\src\eigen_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Logger.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\quatutil.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalC.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalG.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJ.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJp.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalJpp.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalM.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Robots\LinAxis\la_evalT0E.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Skew.cpp" />
+    <ClCompile Include="..\..\..\orc-a\src\Logger.cpp" />
     <ClCompile Include="ArcLinAxisContr.cpp" />
+    <ClCompile Include="eigen_tc.cpp" />
     <ClCompile Include="TcPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|TwinCAT UM (x86)'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|TwinCAT RT (x86)'">Create</PrecompiledHeader>
@@ -218,7 +209,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|TwinCAT RT (x64)'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\..\..\..\..\twincat\TcIntrin\v141\Include;$(EIGENDIR);.\..\..\..\..\twincat\eigen_import_libs;.\..\..\..\..\lib\include;.\..\..\..\..\models\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\..\TcIntrin\v141\Include;$(EIGENDIR);.\..\..\..\mujoco_tc\src;.\..\..\..\mujoco_tc\include;.\..\..\..\eigen_import_libs;.\..\..\..\orc-a\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TCMATH_BLOCK_STANDARDLIB=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>

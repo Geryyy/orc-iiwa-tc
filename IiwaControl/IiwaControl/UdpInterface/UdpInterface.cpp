@@ -5,9 +5,9 @@
 
 #include <cmath>
 #include "UdpInterface.h"
-#include <arc/com/com_settings.h>
-#include <arc/Robots/LBRIiwa/LBRIiwa.h>
-#include <arc/Robots/LinAxis/LinearAxis.h>
+#include <orc/com/com_settings.h>
+#include <orc/robots/Iiwa.h>
+#include <orc/robots/LinearAxis.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -158,35 +158,35 @@ HRESULT CUdpInterface::SetObjStateSO()
 		{	
 			/* Iiwa */
 			// SIL port
-			m_Trace.Log(tlInfo, FLEAVEA "Iiwa SIL Server: Listen to UDP Port: %d", arc::Robots::Iiwa::SIL_CONTROLLER_PORT);
-			if (FAILED(hr = m_spUdpProt->RegisterReceiver(arc::Robots::Iiwa::SIL_CONTROLLER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
+			m_Trace.Log(tlInfo, FLEAVEA "Iiwa SIL Server: Listen to UDP Port: %d", orc::robots::Iiwa::SIL_CONTROLLER_PORT);
+			if (FAILED(hr = m_spUdpProt->RegisterReceiver(orc::robots::Iiwa::SIL_CONTROLLER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
 			{
-				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", arc::Robots::Iiwa::SIL_CONTROLLER_PORT);
+				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", orc::robots::Iiwa::SIL_CONTROLLER_PORT);
 				m_spUdpProt = NULL;
 			}
 
 			// trajectory port
-			m_Trace.Log(tlInfo, FLEAVEA "Iiwa Trajectory Server: Listen to UDP Port: %d", arc::Robots::Iiwa::SERVER_PORT);
-			if (FAILED(hr = m_spUdpProt->RegisterReceiver(arc::Robots::Iiwa::SERVER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
+			m_Trace.Log(tlInfo, FLEAVEA "Iiwa Trajectory Server: Listen to UDP Port: %d", orc::robots::Iiwa::SERVER_PORT);
+			if (FAILED(hr = m_spUdpProt->RegisterReceiver(orc::robots::Iiwa::SERVER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
 			{
-				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", arc::Robots::Iiwa::SERVER_PORT);
+				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", orc::robots::Iiwa::SERVER_PORT);
 				m_spUdpProt = NULL;
 			}
 
 			/* LinearAxis */
 			// SIL port
-			m_Trace.Log(tlInfo, FLEAVEA "LinearAxis SIL Server: Listen to UDP Port: %d", arc::Robots::LinAxis::SIL_CONTROLLER_PORT);
-			if (FAILED(hr = m_spUdpProt->RegisterReceiver(arc::Robots::LinAxis::SIL_CONTROLLER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
+			m_Trace.Log(tlInfo, FLEAVEA "LinearAxis SIL Server: Listen to UDP Port: %d", orc::robots::LinearAxis::SIL_CONTROLLER_PORT);
+			if (FAILED(hr = m_spUdpProt->RegisterReceiver(orc::robots::LinearAxis::SIL_CONTROLLER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
 			{
-				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", arc::Robots::Iiwa::SIL_CONTROLLER_PORT);
+				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", orc::robots::Iiwa::SIL_CONTROLLER_PORT);
 				m_spUdpProt = NULL;
 			}
 
 			// trajectory port
-			m_Trace.Log(tlInfo, FLEAVEA "LinearAxis Trajectory Server: Listen to UDP Port: %d", arc::Robots::LinAxis::SERVER_PORT);
-			if (FAILED(hr = m_spUdpProt->RegisterReceiver(arc::Robots::LinAxis::SERVER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
+			m_Trace.Log(tlInfo, FLEAVEA "LinearAxis Trajectory Server: Listen to UDP Port: %d", orc::robots::LinearAxis::SERVER_PORT);
+			if (FAILED(hr = m_spUdpProt->RegisterReceiver(orc::robots::LinearAxis::SERVER_PORT, THIS_CAST(ITcIoUdpProtocolRecv))))
 			{
-				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", arc::Robots::LinAxis::SERVER_PORT);
+				m_Trace.Log(tlError, FLEAVEA "Server: UdpProt RegisterReceiver failed on Port: %d", orc::robots::LinearAxis::SERVER_PORT);
 				m_spUdpProt = NULL;
 			}
 		}
@@ -205,11 +205,11 @@ HRESULT CUdpInterface::SetObjStateSO()
 	{
 		if (m_spUdpProt != NULL)
 		{
-			m_spUdpProt->UnregisterReceiver(arc::Robots::Iiwa::SIL_CONTROLLER_PORT);
-			m_spUdpProt->UnregisterReceiver(arc::Robots::Iiwa::SERVER_PORT);
+			m_spUdpProt->UnregisterReceiver(orc::robots::Iiwa::SIL_CONTROLLER_PORT);
+			m_spUdpProt->UnregisterReceiver(orc::robots::Iiwa::SERVER_PORT);
 
-			m_spUdpProt->UnregisterReceiver(arc::Robots::LinAxis::SIL_CONTROLLER_PORT);
-			m_spUdpProt->UnregisterReceiver(arc::Robots::LinAxis::SERVER_PORT);
+			m_spUdpProt->UnregisterReceiver(orc::robots::LinearAxis::SIL_CONTROLLER_PORT);
+			m_spUdpProt->UnregisterReceiver(orc::robots::LinearAxis::SERVER_PORT);
 		}
 		m_spUdpProt = NULL;
 
@@ -230,11 +230,11 @@ HRESULT CUdpInterface::SetObjStateOS()
 
 	if (m_spUdpProt != NULL)
 	{
-		m_spUdpProt->UnregisterReceiver(arc::Robots::Iiwa::SIL_CONTROLLER_PORT);
-		m_spUdpProt->UnregisterReceiver(arc::Robots::Iiwa::SERVER_PORT);
+		m_spUdpProt->UnregisterReceiver(orc::robots::Iiwa::SIL_CONTROLLER_PORT);
+		m_spUdpProt->UnregisterReceiver(orc::robots::Iiwa::SERVER_PORT);
 
-		m_spUdpProt->UnregisterReceiver(arc::Robots::LinAxis::SIL_CONTROLLER_PORT);
-		m_spUdpProt->UnregisterReceiver(arc::Robots::LinAxis::SERVER_PORT);
+		m_spUdpProt->UnregisterReceiver(orc::robots::LinearAxis::SIL_CONTROLLER_PORT);
+		m_spUdpProt->UnregisterReceiver(orc::robots::LinearAxis::SERVER_PORT);
 	}
 	m_spUdpProt = NULL;
 
@@ -263,14 +263,14 @@ HRESULT CUdpInterface::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_
 	if (m_Iiwa_Inputs.tx_msg.request == true) {
 		m_Iiwa_Inputs.tx_msg.request = false;
 		const uint16_t msg_size = std::min<int>(m_Iiwa_Inputs.tx_msg.size, sizeof(m_Iiwa_Inputs.tx_msg.data));
-		hr = m_spUdpProt->SendData(client_ipaddr, arc::Robots::Iiwa::CLIENT_PORT, arc::Robots::Iiwa::SERVER_PORT, msg_size, &(m_Iiwa_Inputs.tx_msg.data[0]), true);
-		hr = m_spUdpProt->SendData(client_ipaddr, arc::Robots::Iiwa::CLIENT_PORT + 100, arc::Robots::Iiwa::SERVER_PORT + 100, msg_size, &(m_Iiwa_Inputs.tx_msg.data[0]), true);
+		hr = m_spUdpProt->SendData(client_ipaddr, orc::robots::Iiwa::CLIENT_PORT, orc::robots::Iiwa::SERVER_PORT, msg_size, &(m_Iiwa_Inputs.tx_msg.data[0]), true);
+		hr = m_spUdpProt->SendData(client_ipaddr, orc::robots::Iiwa::CLIENT_PORT + 100, orc::robots::Iiwa::SERVER_PORT + 100, msg_size, &(m_Iiwa_Inputs.tx_msg.data[0]), true);
 		const ULONG ipAddr = client_ipaddr;
-		//m_Trace.Log(tlInfo, FLEAVEA "ARC Send Data: IP: %d.%d.%d.%d udpSrcPort: %d DataSize: %d (hr2=%x) \n", ((PBYTE)&ipAddr)[3], ((PBYTE)&ipAddr)[2], ((PBYTE)&ipAddr)[1], ((PBYTE)&ipAddr)[0], arc::Robots::Iiwa::SERVER_PORT, msg_size, hr);
+		//m_Trace.Log(tlInfo, FLEAVEA "ARC Send Data: IP: %d.%d.%d.%d udpSrcPort: %d DataSize: %d (hr2=%x) \n", ((PBYTE)&ipAddr)[3], ((PBYTE)&ipAddr)[2], ((PBYTE)&ipAddr)[1], ((PBYTE)&ipAddr)[0], orc::robots::Iiwa::SERVER_PORT, msg_size, hr);
 	}
 	
 	// SIL - send torque setpoint
-	hr = m_spUdpProt->SendData(client_ipaddr, arc::Robots::Iiwa::SIL_MODEL_PORT, arc::Robots::Iiwa::SIL_CONTROLLER_PORT, sizeof(m_Iiwa_Sil_Input.joint_torque), &(m_Iiwa_Sil_Input.joint_torque), true);
+	hr = m_spUdpProt->SendData(client_ipaddr, orc::robots::Iiwa::SIL_MODEL_PORT, orc::robots::Iiwa::SIL_CONTROLLER_PORT, sizeof(m_Iiwa_Sil_Input.joint_torque), &(m_Iiwa_Sil_Input.joint_torque), true);
 
 
 	/* Linear Axis TX */
@@ -278,12 +278,12 @@ HRESULT CUdpInterface::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_
 	if (m_LinAxis_Inputs.tx_msg.request == true) {
 		m_LinAxis_Inputs.tx_msg.request = false;
 		const uint16_t msg_size = std::min<int>(m_LinAxis_Inputs.tx_msg.size, sizeof(m_LinAxis_Inputs.tx_msg.data));
-		hr = m_spUdpProt->SendData(client_ipaddr, arc::Robots::LinAxis::CLIENT_PORT, arc::Robots::LinAxis::SERVER_PORT, msg_size, &(m_LinAxis_Inputs.tx_msg.data[0]), true);
+		hr = m_spUdpProt->SendData(client_ipaddr, orc::robots::LinearAxis::CLIENT_PORT, orc::robots::LinearAxis::SERVER_PORT, msg_size, &(m_LinAxis_Inputs.tx_msg.data[0]), true);
 		const ULONG ipAddr = client_ipaddr;
 	}
 
 	// SIL - send torque setpoint
-	hr = m_spUdpProt->SendData(client_ipaddr, arc::Robots::LinAxis::SIL_MODEL_PORT, arc::Robots::LinAxis::SIL_CONTROLLER_PORT, sizeof(m_LinAxis_Sil_Input.joint_torque), &(m_LinAxis_Sil_Input.joint_torque), true);
+	hr = m_spUdpProt->SendData(client_ipaddr, orc::robots::LinearAxis::SIL_MODEL_PORT, orc::robots::LinearAxis::SIL_CONTROLLER_PORT, sizeof(m_LinAxis_Sil_Input.joint_torque), &(m_LinAxis_Sil_Input.joint_torque), true);
 
 
 
@@ -379,7 +379,7 @@ HRESULT CUdpInterface::ReceiveData(ULONG ipAddr, USHORT udpDestPort, USHORT udpS
 
 	/* Iiwa */
 
-	case arc::Robots::Iiwa::SERVER_PORT:
+	case orc::robots::Iiwa::SERVER_PORT:
 		//m_Iiwa_Outputs.rx_msg.request = true;
 		//m_Iiwa_Outputs.rx_msg.size = sizeof(m_Iiwa_Outputs.rx_msg.data);
 		//memcpy(&(m_Iiwa_Outputs.rx_msg.data[0]), pData, sizeof(m_Iiwa_Outputs.rx_msg.data));
@@ -403,7 +403,7 @@ HRESULT CUdpInterface::ReceiveData(ULONG ipAddr, USHORT udpDestPort, USHORT udpS
 		
 		break;
 
-	case arc::Robots::Iiwa::SIL_CONTROLLER_PORT:
+	case orc::robots::Iiwa::SIL_CONTROLLER_PORT:
 		// SIL receive actual joint state
 		if (nData >= sizeof(m_Iiwa_Sil_Output.joint_state)) {
 			memcpy(&(m_Iiwa_Sil_Output.joint_state), pData, sizeof(m_Iiwa_Sil_Output.joint_state));
@@ -411,7 +411,7 @@ HRESULT CUdpInterface::ReceiveData(ULONG ipAddr, USHORT udpDestPort, USHORT udpS
 		break;
 
 	/* Linear Axis */
-	case arc::Robots::LinAxis::SERVER_PORT:
+	case orc::robots::LinearAxis::SERVER_PORT:
 		m_Trace.Log(tlInfo, FLEAVEA "Linear Axis Trajectory received: IP: %d.%d.%d.%d udpSrcPort: %d DataSize: %d (hr2=%x) \n", ((PBYTE)&ipAddr)[3], ((PBYTE)&ipAddr)[2], ((PBYTE)&ipAddr)[1], ((PBYTE)&ipAddr)[0], udpSrcPort, nData, hr);
 
 		// move received data into linax_msg_buffer
@@ -431,7 +431,7 @@ HRESULT CUdpInterface::ReceiveData(ULONG ipAddr, USHORT udpDestPort, USHORT udpS
 
 		break;
 
-	case arc::Robots::LinAxis::SIL_CONTROLLER_PORT:
+	case orc::robots::LinearAxis::SIL_CONTROLLER_PORT:
 		// SIL receive actual joint state
 		if (nData >= sizeof(m_LinAxis_Sil_Output.joint_state)) {
 			memcpy(&(m_LinAxis_Sil_Output.joint_state), pData, sizeof(m_LinAxis_Sil_Output.joint_state));

@@ -4,8 +4,8 @@
 
 #include "ArcLinAxisControlInterfaces.h"
 #include "StateMachine.h"
-#include <arc/ArcTypes.h>
-#include <arc/Robots/LinAxis/LinearAxis.h>
+#include <orc/ArcTypes.h>
+#include <orc/robots/LinearAxis.h>
 
 #define ROBOT_ENABLE_COOLDOWN 1000*8
 
@@ -65,15 +65,15 @@ protected:
 
 	// TODO: Custom variable
 	ULONG TaskCycleTime = 0; // cycle time in ns 
-	arc::Time Ts;
-	arc::Time t;
+	orc::Time Ts;
+	orc::Time t;
 
-	/*arc::Robots::LinAxis::LinearAxisContrParam arc_contr_param;*/
-	arc::Robots::LinAxis::LinearAxisModel* arc_model_ptr;
-	arc::Robots::LinAxis::LinearAxis* arc_contr_ptr;
-	arc::logic::StateMachine* state_machine_ptr;
+	/*orc::Robots::LinAxis::LinearAxisContrParam arc_contr_param;*/
+	//orc::robots::LinAxis::LinearAxisModel* arc_model_ptr;
+	orc::robots::LinearAxis* arc_contr_ptr;
+	orc::logic::StateMachine* state_machine_ptr;
 
-	using JointVector = arc::Robots::LinAxis::LinearAxis::JointVector;
-	using JointArray = arc::Robots::LinAxis::LinearAxis::JointArray;
-	using JacobianMatrix = arc::Robots::LinAxis::JacobianMatrix;
+	using JointVector = orc::robots::LinearAxis::JointVector;
+	using JointArray = orc::robots::LinearAxis::JointArray;
+	using JacobianMatrix = orc::robots::LinearAxis::JacobianMatrix;
 };

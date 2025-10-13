@@ -55,29 +55,28 @@
     <ClInclude Include="ArcTcControlServices.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\lib\include\mujoco_tc\engine_collision_box_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\eigen_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Logger.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_callback.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_collision_driver_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_collision_primitive_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_core_constraint_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_core_smooth_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_forward_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_io_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_name_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_passive_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_support_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_util_blas_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_util_misc_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_util_solve_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_util_sparse_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\engine_util_spatial_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\mujoco_tc.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\mujoco_tc\mujoco_tc_calculations.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\quatutil.cpp" />
-    <ClCompile Include="..\..\..\..\lib\src\Skew.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\include\mujoco_tc\engine_collision_box_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\include\mujoco_tc\engine_collision_convex_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_callback.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_collision_driver_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_collision_primitive_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_core_constraint_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_core_smooth_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_forward_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_io_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_name_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_passive_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_support_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_blas_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_misc_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_solve_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_sparse_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_spatial_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\mujoco_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\mujoco_tc_calculations.cpp" />
+    <ClCompile Include="..\..\..\orc-a\src\Logger.cpp" />
     <ClCompile Include="ArcController.cpp" />
+    <ClCompile Include="eigen_tc.cpp" />
     <ClCompile Include="TcPch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|TwinCAT UM (x86)'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|TwinCAT RT (x86)'">Create</PrecompiledHeader>
@@ -230,7 +229,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|TwinCAT RT (x64)'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\..\..\..\..\twincat\TcIntrin\v141\Include;$(EIGENDIR);.\..\..\..\..\twincat\eigen_import_libs;.\..\..\..\..\lib\include;.\..\..\..\..\models\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\..\TcIntrin\v141\Include;$(EIGENDIR);.\..\..\..\mujoco_tc\src;.\..\..\..\mujoco_tc\include;.\..\..\..\eigen_import_libs;.\..\..\..\orc-a\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TCMATH_BLOCK_STANDARDLIB=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <LanguageStandard>stdcpp17</LanguageStandard>

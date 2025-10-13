@@ -3,9 +3,9 @@
 #pragma once
 
 #include "ArcTcControlInterfaces.h"
-#include <arc/ArcTypes.h>
-#include <arc/util/Logger.h>
-#include <arc/Robots/LBRIiwa/LBRIiwa.h>
+#include <orc/ArcTypes.h>
+#include <orc/util/Logger.h>
+#include <orc/robots/Iiwa.h>
 #include "StateMachine.h"
 
 #include "TcFileAccessInterfaces.h"
@@ -14,7 +14,7 @@
 
 #define LINEAR_AXIS_ENABLE_COOLDOWN 1000*8
 
-using namespace arc;
+using namespace orc;
 
 class CArcController 
 	: public ITComObject
@@ -83,14 +83,13 @@ protected:
 	Time Ts;
 	Time t;
 
-	arc::log::Logger arc_log;
-	arc::Robots::Iiwa::IiwaContrParam arc_contr_param;
-	arc::Robots::Iiwa::LBRIiwaModel* arc_model_ptr;
-	arc::Robots::Iiwa::LBRIiwa* arc_contr_ptr;
-	arc::logic::StateMachine* state_machine_ptr;
+	orc::log::Logger arc_log;
+	orc::robots::Iiwa::IiwaContrParam arc_contr_param;
+	orc::robots::Iiwa* arc_contr_ptr;
+	orc::logic::StateMachine* state_machine_ptr;
 
-	using JointVector = arc::Robots::Iiwa::LBRIiwa::JointVector;
-	using JointArray = arc::Robots::Iiwa::LBRIiwa::JointArray;
+	using JointVector = orc::robots::Iiwa::JointVector;
+	using JointArray = orc::robots::Iiwa::JointArray;
 
 	// File access helper functions
 	ITcFileAccessPtr m_spFileAccess;

@@ -5,8 +5,8 @@
 
 #include "ArcLinAxisContr.h"
 #include "ArcLinAxisControlVersion.h"
-#include "arc/Robots/LinAxis/LinearAxis.h"
-#include "arc/com/TcServerUtil.h"
+#include "orc/robots/LinearAxis.h"
+#include "orc/com/TcServerUtil.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -148,34 +148,34 @@ HRESULT CArcLinAxisContr::SetObjStateSO()
 	Ts = m_Ts;
 	m_Trace.Log(tlAlways, FLEAVEA "Cycle Time Ts = %f", Ts);
 
-	using namespace arc::Robots;
-	using JointArray = LinAxis::JointArray;
-	using JointVector = LinAxis::JointVector;
+	using namespace orc::robots;
+	using JointArray = LinearAxis::JointArray;
+	using JointVector = LinearAxis::JointVector;
 
-	// set controller parameter
-	LinAxis::LinearAxisContrParam contr_param(false); // true..sim, false..lab
-	JointArray f_c_slow_norm = contr_param.f_c_slow * (2 * Ts); // TODO: function conver to norm. frequ.?
-	JointArray f_c_fast_norm = contr_param.f_c_fast * (2 * Ts);
+	//// set controller parameter
+	//LinearAxis::LinearAxisContrParam contr_param(false); // true..sim, false..lab
+	//JointArray f_c_slow_norm = contr_param.f_c_slow * (2 * Ts); // TODO: function conver to norm. frequ.?
+	//JointArray f_c_fast_norm = contr_param.f_c_fast * (2 * Ts);
 
-	state_machine_ptr = new arc::logic::StateMachine(&m_Trace);
+	//state_machine_ptr = new arc::logic::StateMachine(&m_Trace);
 
-	arc_model_ptr = new LinAxis::LinearAxisModel(f_c_slow_norm, Ts);
-	LinAxis::JointCTParameter js_param(contr_param);
-	LinAxis::CartesianCTParameter ts_param(contr_param);
+	//arc_model_ptr = new LinearAxis::LinearAxisModel(f_c_slow_norm, Ts);
+	//LinearAxis::JointCTParameter js_param(contr_param);
+	//LinearAxis::CartesianCTParameter ts_param(contr_param);
 
-	// create instances
-	m_Trace.Log(tlAlways, FLEAVEA "Init Linear Axis Controller");
-	arc_contr_ptr = new LinAxis::LinearAxis(*arc_model_ptr, js_param, ts_param, Ts);
+	//// create instances
+	//m_Trace.Log(tlAlways, FLEAVEA "Init Linear Axis Controller");
+	//arc_contr_ptr = new LinearAxis::LinearAxis(*arc_model_ptr, js_param, ts_param, Ts);
 
-	// If following call is successful the CycleUpdate method will be called, 
-	// possibly even before method has been left.
-	hr = FAILED(hr) ? hr : AddModuleToCaller(); 
+	//// If following call is successful the CycleUpdate method will be called, 
+	//// possibly even before method has been left.
+	//hr = FAILED(hr) ? hr : AddModuleToCaller(); 
 
-	// Cleanup if transition failed at some stage
-	if ( FAILED(hr) )
-	{
-		RemoveModuleFromCaller(); 
-	}
+	//// Cleanup if transition failed at some stage
+	//if ( FAILED(hr) )
+	//{
+	//	RemoveModuleFromCaller(); 
+	//}
 
 	m_Trace.Log(tlVerbose, FLEAVEA "hr=0x%08x", hr);
 	return hr;
@@ -194,7 +194,6 @@ HRESULT CArcLinAxisContr::SetObjStateOS()
 	// TODO: Add any additional deinitialization
 	DeinitDataPointer();
 	delete arc_contr_ptr;
-	delete arc_model_ptr;
 	delete state_machine_ptr;
 
 	m_Trace.Log(tlVerbose, FLEAVEA "hr=0x%08x", hr);
@@ -219,58 +218,58 @@ HRESULT CArcLinAxisContr::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULO
 {
 	HRESULT hr = S_OK;
 
-	/* Timing */
-	hr = FAILED(hr) ? hr : ipTask->GetCycleTime(&TaskCycleTime);
-	Ts = ((double)TaskCycleTime) / ((double)1e9);
+	///* Timing */
+	//hr = FAILED(hr) ? hr : ipTask->GetCycleTime(&TaskCycleTime);
+	//Ts = ((double)TaskCycleTime) / ((double)1e9);
 
-	// current time
-	t += Ts;
+	//// current time
+	//t += Ts;
 
-	/* UDP input*/
+	///* UDP input*/
 
-	if (m_spudp_rx_msg != NULL) {
-		if (m_spudp_rx_msg->request) {
-			m_spudp_rx_msg->request = false;
-			arc::com::handle_receive(*arc_contr_ptr, &(m_spudp_rx_msg->data[0]), m_spudp_rx_msg->size);
-		}
-	}
+	//if (m_spudp_rx_msg != NULL) {
+	//	if (m_spudp_rx_msg->request) {
+	//		m_spudp_rx_msg->request = false;
+	//		arc::com::handle_receive(*arc_contr_ptr, &(m_spudp_rx_msg->data[0]), m_spudp_rx_msg->size);
+	//	}
+	//}
 
 
-	/* Control runs */
-	/* Robot Control */
+	///* Control runs */
+	///* Robot Control */
 
-	// read inputs
-	JointVector q_act(m_motor_interface_in.position_act.Values);
-	JointVector q_dot_act(m_motor_interface_in.velocity_act.Values);
-	JointVector tau_motor_act(m_motor_interface_in.force_act.Values);
-	
-	state_machine_ptr->run(m_motor_interface_in.motion_enabled,
-		m_Inputs.auto_enable,
-		m_Inputs.enable,
-		m_Inputs.disable);
+	//// read inputs
+	//JointVector q_act(m_motor_interface_in.position_act.Values);
+	//JointVector q_dot_act(m_motor_interface_in.velocity_act.Values);
+	//JointVector tau_motor_act(m_motor_interface_in.force_act.Values);
+	//
+	//state_machine_ptr->run(m_motor_interface_in.motion_enabled,
+	//	m_Inputs.auto_enable,
+	//	m_Inputs.enable,
+	//	m_Inputs.disable);
 
-	// run controller
-	JointVector vel_set;
-	if (state_machine_ptr->is_enable_transition()) {
-		arc::Time T_traj = 1.0;
-		JointVector q_end = q_act;
-		arc_contr_ptr->start(t, q_act, q_end, T_traj);
-		m_Trace.Log(tlInfo, FLEAVEA "arc_contr->start() executed!", hr);
-	}
-	if (state_machine_ptr->get_state() == arc::logic::RobotStatus::ENABLE) {
-		// select desired torque based on state
-		arc_contr_ptr->update(t, q_act);
-		vel_set = arc_contr_ptr->update_velocity_contr(t, q_act);
-	}
-	else {
-		vel_set = JointVector::Zero();
-	}
-	
+	//// run controller
+	//JointVector vel_set;
+	//if (state_machine_ptr->is_enable_transition()) {
+	//	arc::Time T_traj = 1.0;
+	//	JointVector q_end = q_act;
+	//	arc_contr_ptr->start(t, q_act, q_end, T_traj);
+	//	m_Trace.Log(tlInfo, FLEAVEA "arc_contr->start() executed!", hr);
+	//}
+	//if (state_machine_ptr->get_state() == arc::logic::RobotStatus::ENABLE) {
+	//	// select desired torque based on state
+	//	arc_contr_ptr->update(t, q_act);
+	//	vel_set = arc_contr_ptr->update_velocity_contr(t, q_act);
+	//}
+	//else {
+	//	vel_set = JointVector::Zero();
+	//}
+	//
 	// robot interface outputs
 	// force setpoint is unused
 	JointVector::Map(m_motor_interface_out.force_set.Values) = JointVector::Zero();
-	JointVector::Map(m_motor_interface_out.velocity_set.Values) = vel_set;
-	JointVector::Map(m_motor_interface_out.position_set.Values) = arc_contr_ptr->get_q_set();
+	JointVector::Map(m_motor_interface_out.velocity_set.Values) = JointVector::Zero();
+	//JointVector::Map(m_motor_interface_out.position_set.Values) = arc_contr_ptr->get_q_set();
 	m_motor_interface_out.mode_of_operation = ModeOfOperation_e::Velocity;
 	m_motor_interface_out.motion_enable = 0.0;
 	m_motor_interface_out.motion_disable = 0.0;
@@ -286,28 +285,28 @@ HRESULT CArcLinAxisContr::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULO
 	m_motor_interface_out.motor_enable.Values[1] = motor_enable;
 
 	/* UDP output */
-	if (m_spudp_tx_msg != NULL) {
-		m_spudp_tx_msg->request = true;
-		auto msg_size = arc::com::send_robot_data(*arc_contr_ptr, t, state_machine_ptr->get_state(), m_spudp_tx_msg->data, sizeof(m_spudp_tx_msg->data));
-		m_spudp_tx_msg->size = msg_size;
-	}
+	//if (m_spudp_tx_msg != NULL) {
+	//	m_spudp_tx_msg->request = true;
+	//	auto msg_size = arc::com::send_robot_data(*arc_contr_ptr, t, state_machine_ptr->get_state(), m_spudp_tx_msg->data, sizeof(m_spudp_tx_msg->data));
+	//	m_spudp_tx_msg->size = msg_size;
+	//}
 
-	/* set outputs */
+	///* set outputs */
 
-	// actual values
-	JointVector::Map(m_Outputs.q_act.Values) = arc_contr_ptr->model_.q_f;
-	JointVector::Map(m_Outputs.q_dot_act.Values) = arc_contr_ptr->model_.q_dot_f;
+	//// actual values
+	//JointVector::Map(m_Outputs.q_act.Values) = arc_contr_ptr->model_.q_f;
+	//JointVector::Map(m_Outputs.q_dot_act.Values) = arc_contr_ptr->model_.q_dot_f;
 
-	// Jointspace setpoints
-	JointVector::Map(m_Outputs.q_set.Values) = arc_contr_ptr->get_q_set();
-	JointVector::Map(m_Outputs.q_dot_set.Values) = arc_contr_ptr->get_q_dot_set();
-	JointVector::Map(m_Outputs.q_dotdot_set.Values) = arc_contr_ptr->get_q_dotdot_set();
+	//// Jointspace setpoints
+	//JointVector::Map(m_Outputs.q_set.Values) = arc_contr_ptr->get_q_set();
+	//JointVector::Map(m_Outputs.q_dot_set.Values) = arc_contr_ptr->get_q_dot_set();
+	//JointVector::Map(m_Outputs.q_dotdot_set.Values) = arc_contr_ptr->get_q_dotdot_set();
 
-	// control error
-	JointVector::Map(m_Outputs.e_jointspace.Values) = arc_contr_ptr->get_joint_error();
+	//// control error
+	//JointVector::Map(m_Outputs.e_jointspace.Values) = arc_contr_ptr->get_joint_error();
 
-	// torque setpoint
-	JointVector::Map(m_Outputs.tau_set.Values) = arc_contr_ptr->model_.tau_;
+	//// torque setpoint
+	//JointVector::Map(m_Outputs.tau_set.Values) = arc_contr_ptr->model_.tau_;
 
 	//m_Trace.Log(tlWarning, "%d", static_cast<uint16_t>(state_machine_ptr->get_state()));
 

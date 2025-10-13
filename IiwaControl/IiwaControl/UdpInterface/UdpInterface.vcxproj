@@ -191,7 +191,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|TwinCAT RT (x64)'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.\..\..\..\..\twincat\eigen_import_libs;.\..\..\..\..\twincat\TcIntrin\v141\Include;$(EIGENDIR);.\..\..\..\..\lib\include;.\..\..\..\..\models\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\..\..\TcIntrin\v141\Include;$(EIGENDIR);.\..\..\..\mujoco_tc\src;.\..\..\..\mujoco_tc\include;.\..\..\..\eigen_import_libs;.\..\..\..\orc-a\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>MaxSpeed</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>TCMATH_BLOCK_STANDARDLIB=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
