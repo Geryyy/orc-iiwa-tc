@@ -11,6 +11,7 @@
 
 #include "mujoco_tc/engine_io_tc.h"
 #include "mujoco_tc/engine_util_spatial_tc.h"
+#include "mujoco_tc/engine_util_blas_tc.h"
 
 #include "TcInterfaces.h"
 #include "TcRtInterfaces.h"

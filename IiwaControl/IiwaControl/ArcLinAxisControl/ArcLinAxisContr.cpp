@@ -193,8 +193,8 @@ HRESULT CArcLinAxisContr::SetObjStateOS()
 
 	// TODO: Add any additional deinitialization
 	DeinitDataPointer();
-	delete arc_contr_ptr;
-	delete state_machine_ptr;
+	//delete arc_contr_ptr;
+	//delete state_machine_ptr;
 
 	m_Trace.Log(tlVerbose, FLEAVEA "hr=0x%08x", hr);
 	return hr;

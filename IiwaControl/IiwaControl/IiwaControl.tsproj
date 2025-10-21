@@ -4309,7 +4309,7 @@
 							<Parameters>
 								<Parameter PID="#x3002103" Data="04000000"/>
 								<Parameter PID="#x6" Data="fca9f1d24d62203f"/>
-								<Parameter PID="#xe" Data="0000"/>
+								<Parameter PID="#xe" Data="0100"/>
 								<Parameter PID="#x7" Text="iiwa_hanging_with_box_front.mjb" Data="696977615f68616e67696e675f776974685f626f785f66726f6e742e6d6a6200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
 								<Parameter PID="#x1" Data="01"/>
 								<Parameter PID="#x5" Data="01"/>
@@ -4667,7 +4667,7 @@
 							</Value>
 							<Value>
 								<Name>MujocoModel</Name>
-								<EnumText>iiwa_hanging</EnumText>
+								<EnumText>iiwa_hanging_with_mass_gripped</EnumText>
 							</Value>
 							<Value>
 								<Name>CustomMujocoModelPath</Name>
@@ -4919,7 +4919,7 @@
 							</Value>
 							<Value>
 								<Name>client_ip_addr</Name>
-								<Value>3232235779</Value>
+								<Value>3232236035</Value>
 							</Value>
 						</ParameterValues>
 						<InterfacePointerValues>

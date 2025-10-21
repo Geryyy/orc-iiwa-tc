@@ -7,6 +7,7 @@
 #include "ArcTcControlVersion.h"
 #include "orc/robots/Iiwa.h"
 #include "orc/com/TcServerUtil.h"
+#include "orc/util/Logger.h"
 #include "StateMachine.h"
 
 #include <mujoco_tc/mujoco_tc.h>
@@ -223,46 +224,18 @@ HRESULT CArcController::SetObjStateSO()
 
 	// create instances
 	m_Trace.Log(tlAlways, FLEAVEA "Init ArcLab Controller");
-	//arc_contr_ptr = new Iiwa::LBRIiwa(
-	//	*arc_model_ptr, Ts, js_param, ts_param, sp_param, fc_param, gc_param);
 	arc_contr_ptr = new robots::Iiwa((unsigned char*)model_binary, model_size, js_param, ts_param, sp_param, fc_param, gc_param, Ts, f_c_slow_norm, m_Trace);
 	if (arc_contr_ptr->get_endeffector_body_id() < 0) {
 		m_Trace.Log(tlError, FENTERA "Body iiwa_link_e could not be found in MuJoCo model!");
 		return EXIT_FAILURE;
 	}
-
+	
 	state_machine_ptr = new logic::StateMachine(&m_Trace, Ts);
 
-	// Initialize controller
-	//arc_contr_ptr->set_singular_perturbation_state(m_singular_perturbation_enable);
-	//arc_contr_ptr->set_friction_compensation_state(m_friction_compensation_enable);
-
-	// Print tool parameters
-	//Vec3D m_cog_tool = arc_model_ptr->get_endeffector_cog();
-	//Vec3D m_inertia_tool = arc_model_ptr->get_endeffector_inertia();
-	//CartesianVector m_tcp_tool = arc_model_ptr->get_endeffector_tcp();
+	// Print robot details
 	//m_Trace.Log(tlInfo, FLEAVEA "model identifier = %c", arc_model_ptr->model_id);
 	m_Trace.Log(tlInfo, FLEAVEA "nbody = %d", arc_contr_ptr->model->nbody);
 	m_Trace.Log(tlInfo, FLEAVEA "endeffector body id = %d", arc_contr_ptr->get_endeffector_body_id());
-	//m_Trace.Log(tlInfo, FLEAVEA "base body id = %d", arc_model_ptr->base_body_id);
-	//m_Trace.Log(tlInfo, FLEAVEA "tool mass = %f kg", arc_model_ptr->get_endeffector_mass());
-	//m_Trace.Log(tlInfo, FLEAVEA "tool cog  = [%f m, %f m, %f m]", m_cog_tool[0], m_cog_tool[1], m_cog_tool[2]);
-	//m_Trace.Log(tlInfo, FLEAVEA "tool inertia  = [%f, %f, %f]",
-	//	m_inertia_tool[0], m_inertia_tool[1], m_inertia_tool[2]);
-	//m_Trace.Log(tlInfo, FLEAVEA "tool tcp  = [%f m, %f m, %f m]",
-	//	m_tcp_tool[0], m_tcp_tool[1], m_tcp_tool[2]);
-	//m_Trace.Log(tlInfo, FLEAVEA "tool tcp orientation  = [%f °, %f °, %f °]",
-	//	m_tcp_tool[3] * M_PI / 180., m_tcp_tool[4] * M_PI / 180., m_tcp_tool[5] * M_PI / 180.);
-
-	//CartesianVector world_param = arc_model_ptr->get_worldparam();
-	//m_Trace.Log(tlInfo, FLEAVEA "World param translation = [%f m, %f m, %f m]", world_param(0), world_param(1), world_param(2));
-	//m_Trace.Log(tlInfo, FLEAVEA "World param rotation = [%f °, %f °, %f °]", world_param(3), world_param(4), world_param(5));
-
-	//Vec3D rpy;
-	//rpy << 90., 0., 180.;
-	//RotationMatrix rot_mat = arc_model_ptr->get_R_from_rpy(rpy);
-	//mju_printMat(rot_mat.data(), 3, 3, m_Trace);
-	//mju_printMat(&arc_model_ptr->d->xmat[9 * arc_model_ptr->base_body_id], 3, 3, m_Trace);
 
 	m_Trace.Log(tlAlways, FLEAVEA "SAFEOP TO OP finished");
 
@@ -329,63 +302,63 @@ HRESULT CArcController::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG
 {
 	HRESULT hr = S_OK;
 
-	///* Timing */
-	//hr = FAILED(hr) ? hr : ipTask->GetCycleTime(&TaskCycleTime);
-	//Ts = ((double)TaskCycleTime) / ((double)1e9);
-	//orc::log::start_timing(ipTask);
+	/* Timing */
+	hr = FAILED(hr) ? hr : ipTask->GetCycleTime(&TaskCycleTime);
+	Ts = ((double)TaskCycleTime) / ((double)1e9);
+	orc::log::start_timing(ipTask);
 
-	//// current time
-	//t += Ts;
+	// current time
+	t += Ts;
 
-	///* UDP input*/
+	/* UDP input*/
 
-	//if (m_spudp_rx_msg != NULL) {
-	//	if (m_spudp_rx_msg->request) {
-	//		m_spudp_rx_msg->request = false;
-	//		orc::com::handle_receive(*arc_contr_ptr, &(m_spudp_rx_msg->data[0]), m_spudp_rx_msg->size);
-	//	}
-	//}
+	if (m_spudp_rx_msg != NULL) {
+		if (m_spudp_rx_msg->request) {
+			m_spudp_rx_msg->request = false;
+			orc::com::handle_receive(*arc_contr_ptr, &(m_spudp_rx_msg->data[0]), m_spudp_rx_msg->size);
+		}
+	}
 
 
-	///* Control runs in PostCyclic! */
+	/* Control runs in PostCyclic! */
 
-	//
+	
 
-	///* UDP output */
-	//if (m_spudp_tx_msg != NULL) {
-	//	m_spudp_tx_msg->request = true;
-	//	auto msg_size = orc::com::send_robot_data(*arc_contr_ptr, t, state_machine_ptr->get_state(), arc_model_ptr->model_id, m_spudp_tx_msg->data, sizeof(m_spudp_tx_msg->data));
-	//	m_spudp_tx_msg->size = msg_size;
-	//}
+	/* UDP output */
+	if (m_spudp_tx_msg != NULL) {
+		m_spudp_tx_msg->request = true;
+		auto msg_size = orc::com::send_robot_data(*arc_contr_ptr, t, state_machine_ptr->get_state(), arc_contr_ptr->get_model_id(), m_spudp_tx_msg->data, sizeof(m_spudp_tx_msg->data));
+		m_spudp_tx_msg->size = msg_size;
+	}
 
-	///* set outputs */
+	/* set outputs */
 
-	//// actual values
-	//JointVector::Map(m_Outputs.q_act.Values) = arc_contr_ptr->model_.q_f;
-	//JointVector::Map(m_Outputs.q_dot_act.Values) = arc_contr_ptr->model_.q_dot_f;
+	// actual values
+	JointVector::Map(m_Outputs.q_act.Values) = arc_contr_ptr->get_q_act();
+	JointVector::Map(m_Outputs.q_dot_act.Values) = arc_contr_ptr->get_q_dot_act();
 
-	//// Jointspace setpoints
-	//JointVector::Map(m_Outputs.q_set.Values) = arc_contr_ptr->get_q_set();
-	//JointVector::Map(m_Outputs.q_dot_set.Values) = arc_contr_ptr->get_q_dot_set();
-	//JointVector::Map(m_Outputs.q_dotdot_set.Values) = arc_contr_ptr->get_q_dotdot_set();
+	// Jointspace setpoints
+	JointVector::Map(m_Outputs.q_set.Values) = arc_contr_ptr->get_q_set();
+	JointVector::Map(m_Outputs.q_dot_set.Values) = arc_contr_ptr->get_q_dot_set();
+	JointVector::Map(m_Outputs.q_dotdot_set.Values) = arc_contr_ptr->get_q_dotdot_set();
 
-	//// Taskspace setpoints
-	//PoseVector::Map(m_Outputs.pose_set.Values) = arc_contr_ptr->get_pose_set();
-	//CartesianVector::Map(m_Outputs.x_dot_set.Values) = arc_contr_ptr->get_x_dot_set();
-	//CartesianVector::Map(m_Outputs.x_dotdot_set.Values) = arc_contr_ptr->get_x_dotdot_set();
+	// Taskspace setpoints
+	PoseVector::Map(m_Outputs.pose_set.Values) = arc_contr_ptr->get_pose_set();
+	CartesianVector::Map(m_Outputs.x_dot_set.Values) = arc_contr_ptr->get_x_dot_set();
+	CartesianVector::Map(m_Outputs.x_dotdot_set.Values) = arc_contr_ptr->get_x_dotdot_set();
 
-	//// control error
-	//JointVector::Map(m_Outputs.e_jointspace.Values) = arc_contr_ptr->get_joint_error();
-	//CartesianVector::Map(m_Outputs.e_taskspace.Values) = arc_contr_ptr->get_cartesian_error();
+	// control error
+	JointVector::Map(m_Outputs.e_jointspace.Values) = arc_contr_ptr->get_joint_error();
+	CartesianVector::Map(m_Outputs.e_taskspace.Values) = arc_contr_ptr->get_cartesian_error();
 
-	//// torque setpoint
-	//JointVector::Map(m_Outputs.tau_set.Values) = arc_contr_ptr->model_.tau_;
+	// torque setpoint
+	JointVector::Map(m_Outputs.tau_set.Values) = arc_contr_ptr->get_tau_act();
 
-	//// trajectory type
-	//m_Outputs.js_traj_active = arc_contr_ptr->is_jointspace_traj_active();
-	//m_Outputs.ts_traj_active = arc_contr_ptr->is_taskspace_traj_active();
+	// trajectory type
+	m_Outputs.js_traj_active = arc_contr_ptr->is_jointspace_traj_active();
+	m_Outputs.ts_traj_active = arc_contr_ptr->is_taskspace_traj_active();
 
-	//m_Outputs.ncon = arc_model_ptr->d->ncon;
+	m_Outputs.ncon = arc_contr_ptr->data->ncon;
 
 	return hr;
 }
@@ -437,7 +410,7 @@ HRESULT CArcController::PostCyclicUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, 
 {
 	HRESULT hr = S_OK;
 
-	///* Robot Control */
+	/* Robot Control */
 	//if (cycle_num % 1000 == 0) {
 	//	m_Trace.Log(tlVerbose, "cycle %d", cycle_num);
 	//	m_Trace.Log(tlVerbose, "maxuse_arena %d", arc_model_ptr->d->maxuse_arena);
@@ -447,68 +420,80 @@ HRESULT CArcController::PostCyclicUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, 
 
 
 	// read inputs
-	//JointVector q_act(m_robot_interface_in.joint_state_act.Values);
-	//JointVector tau_sens_act(m_robot_interface_in.torque_sensor_act.Values);
-	//JointVector tau_motor_act(m_robot_interface_in.torque_motor_act.Values);
+	JointVector q_act(m_robot_interface_in.joint_state_act.Values);
+	JointVector tau_sens_act(m_robot_interface_in.torque_sensor_act.Values);
+	JointVector tau_motor_act(m_robot_interface_in.torque_motor_act.Values);
 
-	//bool enable_signal = m_Inputs.enable && ((m_Outputs.ncon == 0 && !m_Inputs.omitCCD) || m_Inputs.omitCCD);
-	//bool disable_signal = m_Inputs.disable || ((m_Outputs.ncon > 0) && !m_Inputs.omitCCD);	// stop robot in case of collision
+	bool enable_signal = m_Inputs.enable && ((m_Outputs.ncon == 0 && !m_Inputs.omitCCD) || m_Inputs.omitCCD);
+	bool disable_signal = m_Inputs.disable || ((m_Outputs.ncon > 0) && !m_Inputs.omitCCD);	// stop robot in case of collision
 
-	//state_machine_ptr->run(m_robot_interface_in.application_button == 1.0,
-	//	m_robot_interface_in.motion_enabled,
-	//	enable_signal,
-	//	disable_signal,	
-	//	m_Inputs.move_candle);
+	state_machine_ptr->run(m_robot_interface_in.application_button == 1.0,
+		m_robot_interface_in.motion_enabled,
+		enable_signal,
+		disable_signal,	
+		m_Inputs.move_candle);
 
-	//// run controller
-	//JointVector tau_set;
-	//if (state_machine_ptr->is_enable_transition()) {
-	//	Time T_traj = 1.0;
-	//	JointVector q_end = q_act;
-	//	arc_contr_ptr->start(t, q_act, q_end, T_traj);
-	//	m_Trace.Log(tlInfo, FLEAVEA "arc_contr->start() executed!", hr);
-	//}
-	//// select desired torque based on state
-	//if (state_machine_ptr->get_state() == orc::logic::RobotStatus::ENABLE) {
-	//	if (state_machine_ptr->is_move_candle_transition()) {
-	//		JointVector q_candle = JointVector::Zero();
-	//		Time t_candle = t + Time(10, 0);
-	//		arc_contr_ptr->add_jointspace_trajectory(q_act, q_candle, t, t_candle);
-	//	}
-	//	tau_set = arc_contr_ptr->update(t, q_act, tau_sens_act, tau_motor_act, false);
-	//}
-	//else if (state_machine_ptr->get_state() == orc::logic::RobotStatus::GRAVCOMP) {
-	//	tau_set = arc_contr_ptr->update(t, q_act, tau_sens_act, tau_motor_act, true);
-	//}
-	//else {
-	//	// run gravitation compensation also in off state to see torque before enable
-	//	tau_set = arc_contr_ptr->update(t, q_act, tau_sens_act, tau_motor_act, true);
-	//}
 
-	//// robot interface outputs
-	//JointVector::Map(m_robot_interface_out.torque_set.Values) = tau_set;
-	//m_robot_interface_out.motion_enable = 0.0;
-	//m_robot_interface_out.motion_disable = 0.0;
-	//if (state_machine_ptr->is_disable_transition()) {
-	//	m_robot_interface_out.motion_disable = 1.0;
-	//}
-	//else if (state_machine_ptr->is_enable_transition()) {
-	//	m_robot_interface_out.motion_enable = 1.0;
-	//}
+	// Set robot state 
+	arc_contr_ptr->set_q_act_filtered_derivatives(q_act);
+	arc_contr_ptr->set_tau_sens(tau_sens_act);
+	arc_contr_ptr->set_tau_motor(tau_motor_act);
 
-	//// robot interface works with double: convert bool to double
-	//double motor_enable = 1.0;
-	//for (int i = 0; i < sizeof(m_robot_interface_out.motor_enable.Values) / sizeof(double); i++) {
-	//	m_robot_interface_out.motor_enable.Values[i] = motor_enable;
-	//}
+	// run controller
+	JointVector tau_set;
+	bool return_value;
+	if (state_machine_ptr->is_enable_transition()) {
+		Time T_traj = 1.0;
+		JointVector q_end = q_act;
+		arc_contr_ptr->start(t, q_act, q_end, T_traj);
+		m_Trace.Log(tlInfo, FLEAVEA "arc_contr->start() executed!", hr);
+	}
+	// select desired torque based on state
+	if (state_machine_ptr->get_state() == orc::logic::RobotStatus::ENABLE) {
+		if (state_machine_ptr->is_move_candle_transition()) {
+			JointVector q_candle = JointVector::Zero();
+			Time t_candle = t + Time(10, 0);
+			arc_contr_ptr->add_jointspace_trajectory(q_act, q_candle, t, t_candle);
+		}
+		return_value = arc_contr_ptr->update(t, false);
+	}
+	else if (state_machine_ptr->get_state() == orc::logic::RobotStatus::GRAVCOMP) {
+		return_value = arc_contr_ptr->update(t, true);
+	}
+	else {
+		// run gravitation compensation also in off state to see torque before enable
+		return_value = arc_contr_ptr->update(t, true);
+	}
 
-	// write current motion state (orc::logic::RobotStatus) to arc_contr_ptr, such that it can also be sent over UDP
+	if (return_value)
+		tau_set = arc_contr_ptr->get_tau_act();
+	else
+		return EXIT_FAILURE;
+
+	// robot interface outputs
+	JointVector::Map(m_robot_interface_out.torque_set.Values) = tau_set;
+	m_robot_interface_out.motion_enable = 0.0;
+	m_robot_interface_out.motion_disable = 0.0;
+	if (state_machine_ptr->is_disable_transition()) {
+		m_robot_interface_out.motion_disable = 1.0;
+	}
+	else if (state_machine_ptr->is_enable_transition()) {
+		m_robot_interface_out.motion_enable = 1.0;
+	}
+
+	// robot interface works with double: convert bool to double
+	double motor_enable = 1.0;
+	for (int i = 0; i < sizeof(m_robot_interface_out.motor_enable.Values) / sizeof(double); i++) {
+		m_robot_interface_out.motor_enable.Values[i] = motor_enable;
+	}
+
+	 //write current motion state (orc::logic::RobotStatus) to arc_contr_ptr, such that it can also be sent over UDP
 
 
 	// for debugging values every second or so
-	counter++;
-	if (counter == 10000) {
-		counter = 0;
+	//counter++;
+	//if (counter == 10000) {
+	//	counter = 0;
 		//m_Trace.Log(tlVerbose, "%s", arc_model_ptr->m->names)
 		//m_Trace.Log(tlVerbose, "%d", arc_model_ptr->d->signature)
 /*		orc::logic::RobotStatus status = state_machine_ptr->get_state();
@@ -534,7 +519,7 @@ HRESULT CArcController::PostCyclicUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, 
 	//	m_Trace.Log(tlVerbose, FENTERA);
 
 	// m_Trace.Log(tlVerbose, "Queue size: %i", arc_contr_ptr->traj_queue.get_queue_size());
-	}
+	//}
 
 	return hr;
 }
