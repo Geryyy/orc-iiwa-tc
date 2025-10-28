@@ -55,6 +55,25 @@
     <ClInclude Include="ArcLinAxisControlServices.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\mujoco_tc\include\mujoco_tc\engine_collision_box_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\include\mujoco_tc\engine_collision_convex_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_callback.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_collision_driver_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_collision_primitive_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_core_constraint_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_core_smooth_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_forward_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_io_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_name_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_passive_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_support_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_blas_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_misc_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_solve_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_sparse_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\engine_util_spatial_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\mujoco_tc.cpp" />
+    <ClCompile Include="..\..\..\mujoco_tc\src\mujoco_tc_calculations.cpp" />
     <ClCompile Include="..\..\..\orc-a\src\Logger.cpp" />
     <ClCompile Include="ArcLinAxisContr.cpp" />
     <ClCompile Include="eigen_tc.cpp" />

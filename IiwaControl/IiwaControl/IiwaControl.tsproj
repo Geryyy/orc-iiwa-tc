@@ -4309,7 +4309,7 @@
 							<Parameters>
 								<Parameter PID="#x3002103" Data="04000000"/>
 								<Parameter PID="#x6" Data="fca9f1d24d62203f"/>
-								<Parameter PID="#xe" Data="0100"/>
+								<Parameter PID="#xe" Data="0000"/>
 								<Parameter PID="#x7" Text="iiwa_hanging_with_box_front.mjb" Data="696977615f68616e67696e675f776974685f626f785f66726f6e742e6d6a6200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
 								<Parameter PID="#x1" Data="01"/>
 								<Parameter PID="#x5" Data="01"/>
@@ -4535,7 +4535,7 @@
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">4</AreaNo>
 								<Name>Outputs</Name>
 								<ContextId>1</ContextId>
-								<ByteSize>852</ByteSize>
+								<ByteSize>908</ByteSize>
 								<Symbol CreateSymbol="true">
 									<Name>q_act</Name>
 									<BitSize>448</BitSize>
@@ -4567,65 +4567,71 @@
 									<BitOffs>1792</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
+									<Name>q_d_NS</Name>
+									<BitSize>448</BitSize>
+									<BaseType GUID="{1247A85A-0A92-414F-B870-2E17BF811B63}">acin_control.Joints_t</BaseType>
+									<BitOffs>2240</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
 									<Name>pose_set</Name>
 									<BitSize>448</BitSize>
 									<BaseType GUID="{8769BB03-D2AE-4D6A-9836-4C79D55C7A62}">PoseVec_t</BaseType>
-									<BitOffs>2240</BitOffs>
+									<BitOffs>2688</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>x_dot_set</Name>
 									<BitSize>384</BitSize>
 									<BaseType GUID="{09494390-351C-4BF4-8075-AFF953BFC545}">CartesianVec_t</BaseType>
-									<BitOffs>2688</BitOffs>
+									<BitOffs>3136</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>x_dotdot_set</Name>
 									<BitSize>384</BitSize>
 									<BaseType GUID="{09494390-351C-4BF4-8075-AFF953BFC545}">CartesianVec_t</BaseType>
-									<BitOffs>3072</BitOffs>
+									<BitOffs>3520</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>e_jointspace</Name>
 									<BitSize>448</BitSize>
 									<BaseType GUID="{1247A85A-0A92-414F-B870-2E17BF811B63}">acin_control.Joints_t</BaseType>
-									<BitOffs>3456</BitOffs>
+									<BitOffs>3904</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>e_taskspace</Name>
 									<BitSize>384</BitSize>
 									<BaseType GUID="{09494390-351C-4BF4-8075-AFF953BFC545}">CartesianVec_t</BaseType>
-									<BitOffs>3904</BitOffs>
+									<BitOffs>4352</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>tau_set</Name>
 									<BitSize>448</BitSize>
 									<BaseType GUID="{1247A85A-0A92-414F-B870-2E17BF811B63}">acin_control.Joints_t</BaseType>
-									<BitOffs>4288</BitOffs>
+									<BitOffs>4736</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>js_traj_active</Name>
 									<BitSize>8</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-									<BitOffs>4736</BitOffs>
+									<BitOffs>5184</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>ts_traj_active</Name>
 									<BitSize>8</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-									<BitOffs>4744</BitOffs>
+									<BitOffs>5192</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>ncon</Name>
 									<DisplayName TxtId=""><![CDATA[Number of contacts in model]]></DisplayName>
 									<BitSize>16</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
-									<BitOffs>4752</BitOffs>
+									<BitOffs>5200</BitOffs>
 								</Symbol>
 								<Symbol CreateSymbol="true">
 									<Name>model_path</Name>
 									<BitSize>2048</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
-									<BitOffs>4768</BitOffs>
+									<BitOffs>5216</BitOffs>
 								</Symbol>
 							</DataArea>
 						</DataAreas>
@@ -4667,7 +4673,7 @@
 							</Value>
 							<Value>
 								<Name>MujocoModel</Name>
-								<EnumText>iiwa_hanging_with_mass_gripped</EnumText>
+								<EnumText>iiwa_hanging</EnumText>
 							</Value>
 							<Value>
 								<Name>CustomMujocoModelPath</Name>
@@ -4999,6 +5005,13 @@
 								<PTCID>#x00000004</PTCID>
 								<ContextId>1</ContextId>
 							</Parameter>
+							<Parameter>
+								<Name>MujocoModelPath</Name>
+								<BitSize>1024</BitSize>
+								<BaseType GUID="{18071995-0000-0000-0000-00010000007F}">STRING(127)</BaseType>
+								<PTCID>#x00000005</PTCID>
+								<ContextId>1</ContextId>
+							</Parameter>
 						</Parameters>
 						<DataAreas>
 							<DataArea>
@@ -5029,7 +5042,7 @@
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">4</AreaNo>
 								<Name>Outputs</Name>
 								<ContextId>1</ContextId>
-								<ByteSize>112</ByteSize>
+								<ByteSize>368</ByteSize>
 								<Symbol>
 									<Name>q_act</Name>
 									<BitSize>128</BitSize>
@@ -5071,6 +5084,12 @@
 									<BitSize>128</BitSize>
 									<BaseType GUID="{A546B7AC-861C-4456-87F1-845572578330}">linaxis_t</BaseType>
 									<BitOffs>768</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>model_path</Name>
+									<BitSize>2048</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
+									<BitOffs>896</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
@@ -5176,7 +5195,7 @@
 						<ParameterValues>
 							<Value>
 								<Name>TraceLevelMax</Name>
-								<EnumText>tlWarning</EnumText>
+								<EnumText>tlVerbose</EnumText>
 							</Value>
 							<Value>
 								<Name>mode_of_operation</Name>
@@ -5185,6 +5204,10 @@
 							<Value>
 								<Name>Ts</Name>
 								<Value>0.001</Value>
+							</Value>
+							<Value>
+								<Name>MujocoModelPath</Name>
+								<String>linear_axis_meshless.mjb</String>
 							</Value>
 						</ParameterValues>
 						<InterfacePointerValues>

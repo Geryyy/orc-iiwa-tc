@@ -213,8 +213,6 @@ HRESULT CArcController::SetObjStateSO()
 	Iiwa::IiwaContrParam contr_param(false); // true..sim, false..lab
 	JointArray f_c_slow_norm = contr_param.f_c_slow * (2 * Ts); // TODO: function conver to norm. frequ.?
 	JointArray f_c_fast_norm = contr_param.f_c_fast * (2 * Ts);
-	//arc_model_ptr = new Iiwa::LBRIiwaModel((unsigned char*)model_binary, model_size, m_Trace, f_c_slow_norm, Ts);
-
 
 	Iiwa::JointCTParameter js_param(contr_param);
 	Iiwa::CartesianCTParameter ts_param(contr_param);
@@ -233,7 +231,7 @@ HRESULT CArcController::SetObjStateSO()
 	state_machine_ptr = new logic::StateMachine(&m_Trace, Ts);
 
 	// Print robot details
-	//m_Trace.Log(tlInfo, FLEAVEA "model identifier = %c", arc_model_ptr->model_id);
+	m_Trace.Log(tlInfo, FLEAVEA "model identifier = %c", arc_contr_ptr->get_model_id());
 	m_Trace.Log(tlInfo, FLEAVEA "nbody = %d", arc_contr_ptr->model->nbody);
 	m_Trace.Log(tlInfo, FLEAVEA "endeffector body id = %d", arc_contr_ptr->get_endeffector_body_id());
 
@@ -264,12 +262,10 @@ HRESULT CArcController::SetObjStateOS()
 
 	RemoveModuleFromCaller();
 
-	// TODO: Add any additional deinitialization
 	DeinitDataPointer();
 	delete arc_contr_ptr;
 	delete state_machine_ptr;
-	// This is due to model_binary being saved on the heap
-	delete model_binary;
+	delete model_binary; // This is due to model_binary being saved on the heap
 
 	m_Trace.Log(tlVerbose, FLEAVEA "hr=0x%08x", hr);
 	return hr;
@@ -281,9 +277,6 @@ HRESULT CArcController::SetObjStateSP()
 {
 	HRESULT hr = S_OK;
 	m_Trace.Log(tlVerbose, FENTERA);
-
-	// TODO: Add deinitialization code
-	// 
 
 	if (m_spFileAccess != NULL)
 	{
@@ -319,11 +312,7 @@ HRESULT CArcController::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG
 		}
 	}
 
-
 	/* Control runs in PostCyclic! */
-
-	
-
 	/* UDP output */
 	if (m_spudp_tx_msg != NULL) {
 		m_spudp_tx_msg->request = true;
@@ -346,6 +335,7 @@ HRESULT CArcController::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG
 	PoseVector::Map(m_Outputs.pose_set.Values) = arc_contr_ptr->get_pose_set();
 	CartesianVector::Map(m_Outputs.x_dot_set.Values) = arc_contr_ptr->get_x_dot_set();
 	CartesianVector::Map(m_Outputs.x_dotdot_set.Values) = arc_contr_ptr->get_x_dotdot_set();
+	JointVector::Map(m_Outputs.q_d_NS.Values) = arc_contr_ptr->get_q_NS_set();
 
 	// control error
 	JointVector::Map(m_Outputs.e_jointspace.Values) = arc_contr_ptr->get_joint_error();
@@ -410,15 +400,6 @@ HRESULT CArcController::PostCyclicUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, 
 {
 	HRESULT hr = S_OK;
 
-	/* Robot Control */
-	//if (cycle_num % 1000 == 0) {
-	//	m_Trace.Log(tlVerbose, "cycle %d", cycle_num);
-	//	m_Trace.Log(tlVerbose, "maxuse_arena %d", arc_model_ptr->d->maxuse_arena);
-	//	m_Trace.Log(tlVerbose, "maxuse_memory %d", arc_model_ptr->d->maxuse_stack);
-	//}
-	//cycle_num++;
-
-
 	// read inputs
 	JointVector q_act(m_robot_interface_in.joint_state_act.Values);
 	JointVector tau_sens_act(m_robot_interface_in.torque_sensor_act.Values);
@@ -432,7 +413,6 @@ HRESULT CArcController::PostCyclicUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, 
 		enable_signal,
 		disable_signal,	
 		m_Inputs.move_candle);
-
 
 	// Set robot state 
 	arc_contr_ptr->set_q_act_filtered_derivatives(q_act);
@@ -486,40 +466,6 @@ HRESULT CArcController::PostCyclicUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, 
 	for (int i = 0; i < sizeof(m_robot_interface_out.motor_enable.Values) / sizeof(double); i++) {
 		m_robot_interface_out.motor_enable.Values[i] = motor_enable;
 	}
-
-	 //write current motion state (orc::logic::RobotStatus) to arc_contr_ptr, such that it can also be sent over UDP
-
-
-	// for debugging values every second or so
-	//counter++;
-	//if (counter == 10000) {
-	//	counter = 0;
-		//m_Trace.Log(tlVerbose, "%s", arc_model_ptr->m->names)
-		//m_Trace.Log(tlVerbose, "%d", arc_model_ptr->d->signature)
-/*		orc::logic::RobotStatus status = state_machine_ptr->get_state();
-		m_Trace.Log(tlVerbose, "%d", static_cast<uint16_t>(status));
-		m_Trace.Log(tlVerbose, "size status %d", sizeof(status));
-		m_Trace.Log(tlVerbose, "size serial %d", sizeof(static_cast<uint16_t>(status)))*/;
-
-	//	m_Trace.Log(tlVerbose, "-H0e");
-	//	mju_printMat_row_major(arc_model_ptr->H_0_e.data(), 4, 4, m_Trace);
-	//	m_Trace.Log(tlVerbose, "J");
-	//	mju_printMat_row_major(arc_model_ptr->J.data(), 6, 7, m_Trace);
-	//	m_Trace.Log(tlVerbose, "J_dot");
-	//	mju_printMat_row_major(arc_model_ptr->J_dot.data(), 6, 7, m_Trace);
-	//	m_Trace.Log(tlVerbose, "TCP");
-	//	mju_printVec(arc_model_ptr->get_endeffector_tcp().data(), 6, m_Trace);
-	//	m_Trace.Log(tlVerbose, "M");
-	//	mju_printMat_row_major(arc_model_ptr->get_current_M().data(), 7, 7, m_Trace);
-	//	m_Trace.Log(tlVerbose, "C");
-	//	mju_printMat_row_major(arc_model_ptr->C.data(), 7, 7, m_Trace);
-	//	m_Trace.Log(tlVerbose, "g");
-	//	mju_printVec(arc_model_ptr->G.data(), 7, m_Trace);
-
-	//	m_Trace.Log(tlVerbose, FENTERA);
-
-	// m_Trace.Log(tlVerbose, "Queue size: %i", arc_contr_ptr->traj_queue.get_queue_size());
-	//}
 
 	return hr;
 }

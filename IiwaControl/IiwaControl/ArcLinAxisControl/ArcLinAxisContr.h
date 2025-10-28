@@ -7,6 +7,8 @@
 #include <orc/ArcTypes.h>
 #include <orc/robots/LinearAxis.h>
 
+#include "TcFileAccessInterfaces.h"
+
 #define ROBOT_ENABLE_COOLDOWN 1000*8
 
 class CArcLinAxisContr 
@@ -54,6 +56,7 @@ protected:
 	TcTraceLevel m_TraceLevelMax;
 	ModeOfOperation_e m_mode_of_operation;
 	double m_Ts;
+	STRING127 m_MujocoModelPath;
 	ArcLinAxisContrInputs m_Inputs;
 	ArcLinAxisContrOutputs m_Outputs;
 	ArcLinAxisContrmotor_interface_in m_motor_interface_in;
@@ -68,12 +71,18 @@ protected:
 	orc::Time Ts;
 	orc::Time t;
 
-	/*orc::Robots::LinAxis::LinearAxisContrParam arc_contr_param;*/
-	//orc::robots::LinAxis::LinearAxisModel* arc_model_ptr;
 	orc::robots::LinearAxis* arc_contr_ptr;
 	orc::logic::StateMachine* state_machine_ptr;
 
 	using JointVector = orc::robots::LinearAxis::JointVector;
 	using JointArray = orc::robots::LinearAxis::JointArray;
 	using JacobianMatrix = orc::robots::LinearAxis::JacobianMatrix;
+
+	// File access helper functions
+	ITcFileAccessPtr m_spFileAccess;
+	// Setting the model_binary type to unsigned char, leads to correct representation of the data
+	// when compared to the hex editor of Notepad++.
+	PUCHAR model_binary;
+	UINT model_size;
+	HRESULT readBinaryModel(PCCH fileName);
 };

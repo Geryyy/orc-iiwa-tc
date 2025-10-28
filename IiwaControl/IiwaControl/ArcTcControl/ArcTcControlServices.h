@@ -109,6 +109,7 @@ typedef struct _ArcControllerOutputs
 	acin_control_Joints_t q_set;
 	acin_control_Joints_t q_dot_set;
 	acin_control_Joints_t q_dotdot_set;
+	acin_control_Joints_t q_d_NS;
 	PoseVec_t pose_set;
 	CartesianVec_t x_dot_set;
 	CartesianVec_t x_dotdot_set;
