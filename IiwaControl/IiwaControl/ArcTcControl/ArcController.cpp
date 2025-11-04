@@ -211,8 +211,8 @@ HRESULT CArcController::SetObjStateSO()
 
 	// set controller parameter
 	Iiwa::IiwaContrParam contr_param(false); // true..sim, false..lab
-	JointArray f_c_slow_norm = contr_param.f_c_slow * (2 * Ts); // TODO: function conver to norm. frequ.?
-	JointArray f_c_fast_norm = contr_param.f_c_fast * (2 * Ts);
+	JointArray f_c_slow_norm = contr_param.f_c_slow * (2 * Ts.toSec());
+	JointArray f_c_fast_norm = contr_param.f_c_fast * (2 * Ts.toSec());
 
 	Iiwa::JointCTParameter js_param(contr_param);
 	Iiwa::CartesianCTParameter ts_param(contr_param);

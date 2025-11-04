@@ -180,15 +180,16 @@ static void setf4(float* rgba, float r, float g, float b, float a) {
 
 
 // set visual options to default values
+// TC: Added F ad the ending of magic numbers, such that no warning for truncation arises
 void mj_defaultVisual(mjVisual* vis) {
     // global
     vis->global.orthographic = 0;
     vis->global.fovy = 45;
-    vis->global.ipd = 0.068;
+    vis->global.ipd = 0.068F;
     vis->global.azimuth = 90;
     vis->global.elevation = -45;
     vis->global.linewidth = 1.0;
-    vis->global.glow = 0.3;
+    vis->global.glow = 0.3F;
     vis->global.offwidth = 640;
     vis->global.offheight = 480;
     vis->global.realtime = 1.0;
@@ -203,12 +204,12 @@ void mj_defaultVisual(mjVisual* vis) {
     vis->quality.numquads = 4;
 
     // head light
-    vis->headlight.ambient[0] = 0.1;
-    vis->headlight.ambient[1] = 0.1;
-    vis->headlight.ambient[2] = 0.1;
-    vis->headlight.diffuse[0] = 0.4;
-    vis->headlight.diffuse[1] = 0.4;
-    vis->headlight.diffuse[2] = 0.4;
+    vis->headlight.ambient[0] = 0.1F;
+    vis->headlight.ambient[1] = 0.1F;
+    vis->headlight.ambient[2] = 0.1F;
+    vis->headlight.diffuse[0] = 0.4F;
+    vis->headlight.diffuse[1] = 0.4F;
+    vis->headlight.diffuse[2] = 0.4F;
     vis->headlight.specular[0] = 0.5;
     vis->headlight.specular[1] = 0.5;
     vis->headlight.specular[2] = 0.5;
@@ -217,63 +218,63 @@ void mj_defaultVisual(mjVisual* vis) {
     // map parameters
     vis->map.stiffness = 100;
     vis->map.stiffnessrot = 500;
-    vis->map.force = 0.005;
-    vis->map.torque = 0.1;
-    vis->map.alpha = 0.3;
+    vis->map.force = 0.005F;
+    vis->map.torque = 0.1F;
+    vis->map.alpha = 0.3F;
     vis->map.fogstart = 3.0;
     vis->map.fogend = 10.0;
-    vis->map.znear = 0.01;
+    vis->map.znear = 0.01F;
     vis->map.zfar = 50.0;
-    vis->map.haze = 0.3;
+    vis->map.haze = 0.3F;
     vis->map.shadowclip = 1.0;
-    vis->map.shadowscale = 0.6;
+    vis->map.shadowscale = 0.6F;
     vis->map.actuatortendon = 2.0;
 
     // size parameters
-    vis->scale.forcewidth = 0.1;
-    vis->scale.contactwidth = 0.3;
-    vis->scale.contactheight = 0.1;
-    vis->scale.connect = 0.2;
-    vis->scale.com = 0.4;
-    vis->scale.camera = 0.3;
-    vis->scale.light = 0.3;
-    vis->scale.selectpoint = 0.2;
+    vis->scale.forcewidth = 0.1F;
+    vis->scale.contactwidth = 0.3F;
+    vis->scale.contactheight = 0.1F;
+    vis->scale.connect = 0.2F;
+    vis->scale.com = 0.4F;
+    vis->scale.camera = 0.3F;
+    vis->scale.light = 0.3F;
+    vis->scale.selectpoint = 0.2F;
     vis->scale.jointlength = 1.0;
-    vis->scale.jointwidth = 0.1;
-    vis->scale.actuatorlength = 0.7;
-    vis->scale.actuatorwidth = 0.2;
+    vis->scale.jointwidth = 0.1F;
+    vis->scale.actuatorlength = 0.7F;
+    vis->scale.actuatorwidth = 0.2F;
     vis->scale.framelength = 1.0;
-    vis->scale.framewidth = 0.1;
-    vis->scale.constraint = 0.1;
-    vis->scale.slidercrank = 0.2;
+    vis->scale.framewidth = 0.1F;
+    vis->scale.constraint = 0.1F;
+    vis->scale.slidercrank = 0.2F;
     vis->scale.frustum = 10.0;
 
     // colors
-    setf4(vis->rgba.fog, 0., 0., 0., 1.);
-    setf4(vis->rgba.haze, 1., 1., 1., 1.);
-    setf4(vis->rgba.force, 1., .5, .5, 1.);
-    setf4(vis->rgba.inertia, .8, .2, .2, .6);
-    setf4(vis->rgba.joint, .2, .6, .8, 1.);
-    setf4(vis->rgba.actuator, .2, .25, .2, 1);
-    setf4(vis->rgba.actuatornegative, .2, .6, .9, 1.);
-    setf4(vis->rgba.actuatorpositive, .9, .4, .2, 1.);
-    setf4(vis->rgba.com, .9, .9, .9, 1.);
-    setf4(vis->rgba.camera, .6, .9, .6, 1);
-    setf4(vis->rgba.light, .6, .6, .9, 1.);
-    setf4(vis->rgba.selectpoint, .9, .9, .1, 1.);
-    setf4(vis->rgba.connect, .2, .2, .8, 1.);
-    setf4(vis->rgba.contactpoint, .9, .6, .2, 1.);
-    setf4(vis->rgba.contactforce, .7, .9, .9, 1.);
-    setf4(vis->rgba.contactfriction, .9, .8, .4, 1.);
-    setf4(vis->rgba.contacttorque, .9, .7, .9, 1.);
-    setf4(vis->rgba.contactgap, .5, .8, .9, 1.);
-    setf4(vis->rgba.rangefinder, 1., 1., .1, 1.);
-    setf4(vis->rgba.constraint, .9, .0, .0, 1.);
-    setf4(vis->rgba.slidercrank, .5, .3, .8, 1.);
-    setf4(vis->rgba.crankbroken, .9, .0, .0, 1.);
-    setf4(vis->rgba.frustum, 1., 1., .0, .2);
-    setf4(vis->rgba.bv, 0., 1., .0, .5);
-    setf4(vis->rgba.bvactive, 1., 0., .0, .5);
+    setf4(vis->rgba.fog, 0.F, 0.F, 0.F, 1.);
+    setf4(vis->rgba.haze, 1.F, 1.F, 1.F, 1.);
+    setf4(vis->rgba.force, 1.F, .5F, .5F, 1.);
+    setf4(vis->rgba.inertia, .8F, .2F, .2F, .6F);
+    setf4(vis->rgba.joint, .2F, .6F, .8F, 1.F);
+    setf4(vis->rgba.actuator, .2F, .25F, .2F, 1);
+    setf4(vis->rgba.actuatornegative, .2F, .6F, .9F, 1.F);
+    setf4(vis->rgba.actuatorpositive, .9F, .4F, .2F, 1.F);
+    setf4(vis->rgba.com, .9F, .9F, .9F, 1.F);
+    setf4(vis->rgba.camera, .6F, .9F, .6F, 1.F);
+    setf4(vis->rgba.light, .6F, .6F, .9F, 1.F);
+    setf4(vis->rgba.selectpoint, .9F, .9F, .1F, 1.F);
+    setf4(vis->rgba.connect, .2F, .2F, .8F, 1.F);
+    setf4(vis->rgba.contactpoint, .9F, .6F, .2F, 1.F);
+    setf4(vis->rgba.contactforce, .7F, .9F, .9F, 1.F);
+    setf4(vis->rgba.contactfriction, .9F, .8F, .4F, 1.F);
+    setf4(vis->rgba.contacttorque, .9F, .7F, .9F, 1.F);
+    setf4(vis->rgba.contactgap, .5F, .8F, .9F, 1.F);
+    setf4(vis->rgba.rangefinder, 1.F, 1.F, .1F, 1.F);
+    setf4(vis->rgba.constraint, .9F, .0F, .0F, 1.F);
+    setf4(vis->rgba.slidercrank, .5F, .3F, .8F, 1.F);
+    setf4(vis->rgba.crankbroken, .9F, .0F, .0F, 1.F);
+    setf4(vis->rgba.frustum, 1.F, 1.F, .0F, .2F);
+    setf4(vis->rgba.bv, 0.F, 1.F, .0F, .5);
+    setf4(vis->rgba.bvactive, 1.F, 0.F, .0F, .5);
 }
 
 

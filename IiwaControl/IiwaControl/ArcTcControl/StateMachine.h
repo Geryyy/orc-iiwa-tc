@@ -26,7 +26,7 @@ namespace orc::logic {
 		StateMachine(CTcTrace* trace_ptr, Time Ts) : ptr_Trace(trace_ptr)
 		{
 			t = 0;
-			T_cycle = Ts;
+			T_cycle = static_cast<double>(Ts);
 			state = RobotStatus::OFF;
 
 			m_enable = false;
