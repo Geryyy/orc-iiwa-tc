@@ -2,6 +2,13 @@
 
 Implementation of ORC for Kuka LBR iiwa for TwinCAT.
 
+# Limitations
+`orc-iiwa-tc` requiress a precompiled MuJoCo model in the form of a MJB (binary file). To obtain a real-time loadable MJB file please make sure that:
+- The model ought to have exactly 7 joints, i.e., `model.nq` must be 7.
+- Make sure to build your MJB file using MuJoCo 3.3.2. Use the [mj_saveModel function](https://mujoco.readthedocs.io/en/3.3.2/APIreference/APIfunctions.html#mj-savemodel).
+- No meshes are part of your model. This is easily achievable by setting the [discardvisual flag](https://mujoco.readthedocs.io/en/3.3.2/XMLreference.html#compiler-discardvisual) inside your XML model to true.
+- More exotic features like deformable objects, height fields, etc. are not supported. 
+
 # Setup
 For using ORC on Kuka LBRiiwa open the `IiwaControl` project file.
 
