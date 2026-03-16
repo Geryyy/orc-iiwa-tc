@@ -53,8 +53,9 @@ void mj_jac(const mjModel* m, const mjData* d,
     mjtNum* jacp, mjtNum* jacr, const mjtNum point[3], int body);
 
 // compute body frame Jacobian
-void mj_jacBody(const mjModel* m, const mjData* d,
-    mjtNum* jacp, mjtNum* jacr, int body);
+void mj_jacBody(const mjModel* m, const mjData* d, mjtNum* jacp, mjtNum* jacr, int body);
+// compute site Jacobian
+void mj_jacSite(const mjModel* m, const mjData* d, mjtNum* jacp, mjtNum* jacr, int site);
 
 void mju_printMat(const mjtNum* mat, int nr, int nc, CTcTrace m_Trace);
 void mju_printVec(const mjtNum* vec, int n, CTcTrace m_Trace);

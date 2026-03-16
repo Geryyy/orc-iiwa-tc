@@ -223,7 +223,7 @@ HRESULT CArcController::SetObjStateSO()
 	// create instances
 	m_Trace.Log(tlAlways, FLEAVEA "Init ArcLab Controller");
 	arc_contr_ptr = new robots::Iiwa((unsigned char*)model_binary, model_size, js_param, ts_param, sp_param, fc_param, gc_param, Ts, f_c_slow_norm, m_Trace);
-	if (arc_contr_ptr->get_endeffector_body_id() < 0) {
+	if (arc_contr_ptr->get_endeffector_site_id() < 0) {
 		m_Trace.Log(tlError, FENTERA "Body iiwa_link_e could not be found in MuJoCo model!");
 		return EXIT_FAILURE;
 	}
@@ -233,7 +233,7 @@ HRESULT CArcController::SetObjStateSO()
 	// Print robot details
 	m_Trace.Log(tlInfo, FLEAVEA "model identifier = %c", arc_contr_ptr->get_model_id());
 	m_Trace.Log(tlInfo, FLEAVEA "nbody = %d", arc_contr_ptr->model->nbody);
-	m_Trace.Log(tlInfo, FLEAVEA "endeffector body id = %d", arc_contr_ptr->get_endeffector_body_id());
+	m_Trace.Log(tlInfo, FLEAVEA "endeffector site id = %d", arc_contr_ptr->get_endeffector_site_id());
 
 	m_Trace.Log(tlAlways, FLEAVEA "SAFEOP TO OP finished");
 
