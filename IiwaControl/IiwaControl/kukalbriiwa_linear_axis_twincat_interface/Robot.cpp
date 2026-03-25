@@ -268,7 +268,7 @@ bool Robot::CheckWorkspaceLimits(double *q, double *qp, double *cartesian_positi
 	outside_workspace_error = (cartesian_position[0]<limits->workspace_limits[0] && cartesian_velocity[0]<-ROBOT_VELOCITY_TOLERANCE) ||
 		(cartesian_position[0]>limits->workspace_limits[1] && cartesian_velocity[0]>ROBOT_VELOCITY_TOLERANCE) ||
 		(cartesian_position[1]<limits->workspace_limits[2] && cartesian_velocity[1]<-ROBOT_VELOCITY_TOLERANCE) ||
-		(cartesian_position[1]>limits->workspace_limits[3] && cartesian_velocity[1]>ROBOT_VELOCITY_TOLERANCE);
+		(cartesian_position[1]>limits->workspace_limits[3] && cartesian_velocity[1]>ROBOT_VELOCITY_TOLERANCE)||
 		(cartesian_position[2]<limits->workspace_limits[4] && cartesian_velocity[2]<-ROBOT_VELOCITY_TOLERANCE) || 
 		(cartesian_position[2]>limits->workspace_limits[5] && cartesian_velocity[2]>ROBOT_VELOCITY_TOLERANCE);
 
