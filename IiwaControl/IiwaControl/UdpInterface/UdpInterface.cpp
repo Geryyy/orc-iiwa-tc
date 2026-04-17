@@ -392,7 +392,7 @@ HRESULT CUdpInterface::ReceiveData(ULONG ipAddr, USHORT udpDestPort, USHORT udpS
 		if(iiwa_buf_write_index < (MSG_BUFFER_LEN-1)){
 			if (nData <= sizeof(m_Iiwa_Outputs.rx_msg.data)) {
 				iiwa_buf_write_index++;
-				iiwa_buf_read_index = 0;
+				if (iiwa_buf_read_index < 0) iiwa_buf_read_index = 0;
 				iiwa_msg_buffer[iiwa_buf_write_index].size = static_cast<USHORT>(nData);
 				memcpy(&(iiwa_msg_buffer[iiwa_buf_write_index].data), pData, nData);
 			}
@@ -421,7 +421,7 @@ HRESULT CUdpInterface::ReceiveData(ULONG ipAddr, USHORT udpDestPort, USHORT udpS
 		if (linax_buf_write_index < (MSG_BUFFER_LEN - 1)) {
 			if (nData <= sizeof(m_LinAxis_Outputs.rx_msg.data)) {
 				linax_buf_write_index++;
-				linax_buf_read_index = 0;
+				if (linax_buf_read_index < 0) linax_buf_read_index = 0;
 				linax_msg_buffer[linax_buf_write_index].size = static_cast<USHORT>(nData);
 				memcpy(&(linax_msg_buffer[linax_buf_write_index].data), pData, nData);
 			}
