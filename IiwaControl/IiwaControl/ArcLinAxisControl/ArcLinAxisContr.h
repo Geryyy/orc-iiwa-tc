@@ -4,7 +4,7 @@
 
 #include "ArcLinAxisControlInterfaces.h"
 #include "StateMachine.h"
-#include <orc/ArcTypes.h>
+#include <orc/OrcTypes.h>
 #include <orc/robots/LinearAxis.h>
 
 #include "TcFileAccessInterfaces.h"

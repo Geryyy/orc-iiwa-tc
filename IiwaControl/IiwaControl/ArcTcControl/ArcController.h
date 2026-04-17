@@ -3,7 +3,7 @@
 #pragma once
 
 #include "ArcTcControlInterfaces.h"
-#include <orc/ArcTypes.h>
+#include <orc/OrcTypes.h>
 #include <orc/util/Logger.h>
 #include <orc/robots/Iiwa.h>
 #include "StateMachine.h"
