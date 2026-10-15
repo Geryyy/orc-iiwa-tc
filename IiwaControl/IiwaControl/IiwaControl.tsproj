@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" TcProjectVariant="Robot_frame">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53" TcProjectVariant="KUKA_Robot_Controller">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{1247A85A-0A92-414F-B870-2E17BF811B63}" Namespace="acin_control">Joints_t</Name>
@@ -4243,7 +4243,7 @@
 	</ImageDatas>
 	<Project ProjectGUID="{D94F9592-798B-4E2B-8014-241B54A82AFA}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
-			<Settings MaxCpus="8" NonWinCpus="1" MaxStackSize="4096">
+			<Settings MaxCpus="8" NonWinCpus="2" MaxStackSize="4096">
 				<Cpu CpuId="7" BaseTime="1250"/>
 				<Debugger Priority="61"/>
 			</Settings>
@@ -4277,17 +4277,10 @@
 							<Parameters>
 								<Parameter PID="#x3002103" Data="04000000"/>
 								<Parameter PID="#x6" Data="fca9f1d24d62203f"/>
+								<Parameter PID="#xe" Data="0200"/>
+								<Parameter PID="#x7" Text="iiwa_standing.mjb" Data="696977615f7374616e64696e672e6d6a62002d696977612d74635c6f72632d615c6d6f64656c735c696977615f7374616e64696e672e6d6a620000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
 								<Parameter PID="#x1" Data="01"/>
 								<Parameter PID="#x5" Data="01"/>
-								<Parameter PID="#x7" Data="0000000000000000"/>
-								<Parameter PID="#x8" Data="0000000000000000"/>
-								<Parameter PID="#x9" Data="0000000000000000"/>
-								<Parameter PID="#xa" Data="0000000000000000"/>
-								<Parameter PID="#xc" Data="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
-								<Parameter PID="#xd" Data="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
-								<Parameter PID="#xb" Data="00"/>
-								<Parameter PID="#x10" Data="000000000000000000000000000000000000000000000000"/>
-								<Parameter PID="#xf" Data="000000000000000000000000000000000000000000000000"/>
 								<InterfacePtr PID="#x3002060">
 									<OTCID>#x02010040</OTCID>
 								</InterfacePtr>
@@ -4673,11 +4666,11 @@
 							</Value>
 							<Value>
 								<Name>MujocoModel</Name>
-								<EnumText>iiwa_hanging</EnumText>
+								<EnumText>custom</EnumText>
 							</Value>
 							<Value>
 								<Name>CustomMujocoModelPath</Name>
-								<String></String>
+								<String>iiwa_standing.mjb</String>
 							</Value>
 							<Value>
 								<Name>singular_perturbation_enable</Name>
@@ -8444,7 +8437,7 @@
 						<ParameterValues>
 							<Value>
 								<Name>TraceLevelMax</Name>
-								<EnumText>tlVerbose</EnumText>
+								<EnumText>tlWarning</EnumText>
 							</Value>
 							<Value>
 								<Name>AxisVelocityLimit</Name>
@@ -8540,7 +8533,7 @@
 							</Value>
 							<Value>
 								<Name>WorldTranslation[2]</Name>
-								<Value>1.744</Value>
+								<Value>0</Value>
 							</Value>
 							<Value>
 								<Name>WorldRotation[0]</Name>
@@ -8584,7 +8577,7 @@
 							</Value>
 							<Value>
 								<Name>Is9DOF</Name>
-								<EnumText>TRUE</EnumText>
+								<EnumText>FALSE</EnumText>
 							</Value>
 						</ParameterValues>
 						<InterfacePointerValues>
@@ -8704,9 +8697,9 @@
 				<Name>Device 3 (RT-Ethernet Adapter)</Name>
 				<AddressInfo>
 					<Pnp>
-						<DeviceDesc>Patch panel 2 (ROS) (TwinCAT-Intel PCI Ethernet Ada</DeviceDesc>
-						<DeviceName>\DEVICE\{2A59FC22-2C82-4BE9-A1B9-C90C452D226C}</DeviceName>
-						<DeviceData>80615f171d26</DeviceData>
+						<DeviceDesc>Network card 2, Socket 3 (ROS) (TwinCAT-Intel PCI E</DeviceDesc>
+						<DeviceName>\DEVICE\{5BD447FB-70B5-489B-AFA5-F406C12474F5}</DeviceName>
+						<DeviceData>80615f171c89</DeviceData>
 					</Pnp>
 				</AddressInfo>
 				<Module Id="#x01010040">
@@ -9218,11 +9211,11 @@
 						</InterfacePointerValues>
 					</TmcDesc>
 				</Module>
-				<Ethernet DeviceDesc="Patch panel 2 (ROS) (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) V2 #8)" Ports="1" TcpIpPort="-1" VLanIds="0a0014001e00280032003c00460050005a0064006e00780082008c009600a000aa00b400be00c800d200dc00e600f000fa0004010e01180122012c01360140014a0154015e01680172017c01860190019a01a401ae01b801c201cc01d601e001ea01f401fe01080212021c02260230023a0244024e02580262026c0276028002">
+				<Ethernet DeviceDesc="Network card 2, Socket 3 (ROS) (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) V2 #3)" Ports="1" TcpIpPort="-1" VLanIds="0a0014001e00280032003c00460050005a0064006e00780082008c009600a000aa00b400be00c800d200dc00e600f000fa0004010e01180122012c01360140014a0154015e01680172017c01860190019a01a401ae01b801c201cc01d601e001ea01f401fe01080212021c02260230023a0244024e02580262026c0276028002">
 					<Esl SyncSlaveProtocolPort="-1"/>
 				</Ethernet>
 			</Device>
-			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="128.130.84.36.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+			<Device Id="1" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="128.130.84.36.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
 				<Name>Device 1 (EtherCAT)</Name>
 				<ProjectVariant PvUseDisable="true">
 					<Variant>
@@ -9243,9 +9236,6 @@
 				</AddressInfo>
 				<Image Id="1" AddrType="9" ImageType="3">
 					<Name>Image</Name>
-				</Image>
-				<Image Id="7" AddrType="10" ImageType="3">
-					<Name>Image-2</Name>
 				</Image>
 				<Box Id="1" BoxType="9099">
 					<Name>Box 1 (CU1124)</Name>
@@ -13569,7 +13559,7 @@
 					<SyncUnit Name="SyncUnit CMMT-AS" NoDeleteIfUnused="true"/>
 				</EtherCAT>
 			</Device>
-			<Device Id="2" Disabled="true" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="128.130.84.36.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="4">
+			<Device Id="2" DevType="111" DevFlags="#x0003" AmsPort="28674" AmsNetId="128.130.84.36.3.1" RemoteName="Device 2 (EtherCAT)" InfoImageId="4">
 				<Name>Device 2 (EtherCAT)</Name>
 				<ProjectVariant PvUseDisable="true">
 					<Variant>
@@ -13583,7 +13573,7 @@
 				</ProjectVariant>
 				<AddressInfo>
 					<Pnp>
-						<DeviceDesc>Robot (TwinCAT-Intel PCI Ethernet Adapter (Gigabit)</DeviceDesc>
+						<DeviceDesc>Network card 2, Socket 1 (Robot) (TwinCAT-Intel PCI</DeviceDesc>
 						<DeviceName>\DEVICE\{6C5C505E-5854-40F9-8EE4-B7D2C2173194}</DeviceName>
 						<DeviceData>80615f171c8b</DeviceData>
 					</Pnp>
@@ -17298,7 +17288,7 @@
 				</Box>
 				<EtherCAT DisableContMeasuring="false" DcSyncMode="3" InfoDataId="false" InfoDataCfgSlaveCnt="false"/>
 			</Device>
-			<Device Id="4" Disabled="true" CreateSymbols="true" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="128.130.84.36.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="6">
+			<Device Id="4" CreateSymbols="true" DevType="111" DevFlags="#x0003" AmsPort="28676" AmsNetId="128.130.84.36.5.1" RemoteName="Device 4 (EtherCAT)" InfoImageId="6">
 				<Name>Device 4 (EtherCAT)</Name>
 				<ProjectVariant PvUseDisable="true">
 					<Variant>
@@ -17312,7 +17302,7 @@
 				</ProjectVariant>
 				<AddressInfo>
 					<Pnp>
-						<DeviceDesc>MFT (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) V</DeviceDesc>
+						<DeviceDesc>Network card 2, Socket 2 (MFT) (TwinCAT-Intel PCI E</DeviceDesc>
 						<DeviceName>\DEVICE\{9A49C20F-3540-49A8-A8AE-1C6C8404E315}</DeviceName>
 						<DeviceData>80615f171c8a</DeviceData>
 					</Pnp>
@@ -17669,11 +17659,11 @@
 		</Variants>
 	</Project>
 	<Mappings>
-		<MappingInfo Identifier="{00000000-0010-0304-5000-010110000403}" Id="#x02030010"/>
-		<MappingInfo Identifier="{00000000-0020-0304-5000-010122000403}" Id="#x02030030"/>
+		<MappingInfo Identifier="{00000000-0030-0304-5000-010130000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{00000000-0040-0304-5000-010141000403}" Id="#x02030020"/>
+		<MappingInfo Identifier="{00000000-0050-0304-5000-010150000403}" Id="#x02030030"/>
 		<MappingInfo Identifier="{02010020-0040-0201-5000-010110000101}" Id="#x02030040" Watchdog="04000000040000000400000004000000"/>
 		<MappingInfo Identifier="{02010020-0050-0201-5000-010130000101}" Id="#x02030050" Watchdog="20000000040000000400000004000000"/>
-		<MappingInfo Identifier="{02010020-0070-0304-5000-010170000403}" Id="#x02030020" Watchdog="00000000000000000000000000000000"/>
 		<OwnerA Name="TIXC^ArcLinAxisControl^ArcLinAxisControl">
 			<OwnerB Name="TIXC^UdpInterface^UdpInterface">
 				<Link VarA="Data Pointer^udp_rx_msg" VarB="LinAxis_Outputs^rx_msg"/>
@@ -17687,123 +17677,10 @@
 			</OwnerB>
 		</OwnerA>
 		<OwnerA Name="TIXC^kuka_interface^kuka_interface">
-			<OwnerB Name="TIID^Device 1 (EtherCAT)">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)">
 				<Link VarA="Input^Robot_AmsNetId" VarB="InfoData^AmsNetId"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 1 (CU1124)^Box 4 (CMMT-AS)">
-				<Link VarA="MotorcontrollerInput^Motorcontroller1Input^Modes_of_operation_display" VarB="Inputs^Modes of operation display"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller1Input^Position_actual_value" VarB="Inputs^Position actual value"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller1Input^Statusword" VarB="Inputs^Statusword"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller1Input^Torque_actual_value" VarB="Inputs^Torque actual value"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller1Input^Velocity_actual_value" VarB="Inputs^Velocity actual value"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller1Output^Controlword" VarB="Outputs^Controlword"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller1Output^Modes_of_operation" VarB="Outputs^Modes of operation"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller1Output^Target_position" VarB="Outputs^Target position"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller1Output^Target_torque" VarB="Outputs^Target torque"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller1Output^Target_velocity" VarB="Outputs^Target velocity"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 1 (CU1124)^Box 5 (CMMT-AS)">
-				<Link VarA="MotorcontrollerInput^Motorcontroller2Input^Modes_of_operation_display" VarB="Inputs^Modes of operation display"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller2Input^Position_actual_value" VarB="Inputs^Position actual value"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller2Input^Statusword" VarB="Inputs^Statusword"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller2Input^Torque_actual_value" VarB="Inputs^Torque actual value"/>
-				<Link VarA="MotorcontrollerInput^Motorcontroller2Input^Velocity_actual_value" VarB="Inputs^Velocity actual value"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller2Output^Controlword" VarB="Outputs^Controlword"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller2Output^Modes_of_operation" VarB="Outputs^Modes of operation"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller2Output^Target_position" VarB="Outputs^Target position"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller2Output^Target_torque" VarB="Outputs^Target torque"/>
-				<Link VarA="MotorcontrollerOutput^Motorcontroller2Output^Target_velocity" VarB="Outputs^Target velocity"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 1 (CU1124)^MFT">
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CONNECTION_ID" Size="16" OffsA="168"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC0" Size="16" OffsA="24"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC1" Size="16" OffsA="56"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC2" Size="16" OffsA="88"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC3" Size="16" OffsA="120"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC4" Size="16" OffsA="152"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^FSOE_CMD"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^FSOE_PUZZLE_ANS" Size="8" OffsA="136"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_00" Size="2" OffsA="16"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_01" Size="2" OffsA="22"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_02" Size="2" OffsA="54"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_03" Size="8" OffsA="144"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_04" Size="1" OffsA="18"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_05" Size="1" OffsA="19"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_06" Size="1" OffsA="20"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_07" Size="1" OffsA="21"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_AREA" Size="8" OffsA="80"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_BUSY" Size="1" OffsA="43"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_CMD" Size="4" OffsA="48"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_COMPLETE" Size="1" OffsA="44"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_COUNT" Size="8" OffsA="72"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_DATA" Size="16" OffsA="104"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_DATAVALID" Size="1" OffsA="42"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_COMM" Size="1" OffsA="53"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_READER" Size="1" OffsA="47"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_REFTAG" Size="1" OffsA="46"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_TAGCHANGE" Size="1" OffsA="52"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_TAGS" Size="1" OffsA="45"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_TAGAVAILIBLE" Size="1" OffsA="40"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_TAGVALID" Size="1" OffsA="41"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_2" Size="1" OffsA="14"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_3" Size="1" OffsA="15"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_A1" Size="1" OffsA="13"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_B0" Size="1" OffsA="12"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_2" Size="1" OffsA="10"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_3" Size="1" OffsA="11"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_A1" Size="1" OffsA="9"/>
-				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_B0" Size="1" OffsA="8"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_APPSWITCH" Size="1" OffsA="5"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT0"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT1" Size="1" OffsA="1"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT2" Size="1" OffsA="2"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT3" Size="1" OffsA="3"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT4" Size="1" OffsA="4"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^RESERVED_00" Size="1" OffsA="6"/>
-				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^RESERVED_01" Size="1" OffsA="7"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_INDICATOR_BLUE" Size="1" OffsA="2"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_INDICATOR_GREEN"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_INDICATOR_RED" Size="1" OffsA="1"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_SUPPLY_OFF" Size="1" OffsA="6"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_05" Size="1" OffsA="3"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_06" Size="1" OffsA="7"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_07" Size="1" OffsA="4"/>
-				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_08" Size="1" OffsA="5"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CONNECTION_ID" Size="16" OffsA="168"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC0" Size="16" OffsA="24"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC1" Size="16" OffsA="56"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC2" Size="16" OffsA="88"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC3" Size="16" OffsA="120"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC4" Size="16" OffsA="152"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^FSOE_Cmd"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_00" Size="4" OffsA="12"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_01" Size="2" OffsA="22"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_02" Size="4" OffsA="40"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_03" Size="1" OffsA="44"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_04" Size="2" OffsA="54"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_05" Size="8" OffsA="144"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_15" Size="1" OffsA="20"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_16" Size="1" OffsA="21"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_17" Size="8" OffsA="136"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_18" Size="1" OffsA="16"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_19" Size="1" OffsA="17"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_20" Size="1" OffsA="18"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_21" Size="1" OffsA="19"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_AREA" Size="8" OffsA="80"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_CMD" Size="4" OffsA="48"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_COUNT" Size="8" OffsA="72"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_DATA" Size="16" OffsA="104"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_COMM" Size="1" OffsA="53"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_READER" Size="1" OffsA="47"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_REFTAG" Size="1" OffsA="46"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_TAGCHANGE" Size="1" OffsA="52"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_TAGS" Size="1" OffsA="45"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_2" Size="1" OffsA="10"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_3" Size="1" OffsA="11"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_A1" Size="1" OffsA="9"/>
-				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_B0" Size="1" OffsA="8"/>
-			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^PDS1">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^PDS1">
 				<Link VarA="Input^Input_PDS1" VarB="FSoE-Drive In^Actual SBC 1" Size="1" OffsA="161"/>
 				<Link VarA="Input^Input_PDS1" VarB="FSoE-Drive In^Actual STO 1" Size="1" OffsA="160"/>
 				<Link VarA="Input^Input_PDS1" VarB="FSoE-Drive In^Brake actuator temperature error 1" Size="1" OffsA="436"/>
@@ -17990,7 +17867,7 @@
 				<Link VarA="Output^Output_PDS1" VarB="FSoE-Drive Out^Used Time stamp" Size="32" OffsA="8"/>
 				<Link VarA="Output^Output_PDS1" VarB="FSoE-Drive Out^VMT Challenge" Size="8" OffsA="48"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^PDS23_1">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^PDS23_1">
 				<Link VarA="Input^Input_PDS23_1" VarB="FSoE-Drive In^Actual SBC 1" Size="1" OffsA="161"/>
 				<Link VarA="Input^Input_PDS23_1" VarB="FSoE-Drive In^Actual SBC 2" Size="1" OffsA="289"/>
 				<Link VarA="Input^Input_PDS23_1" VarB="FSoE-Drive In^Actual STO 1" Size="1" OffsA="160"/>
@@ -18290,7 +18167,7 @@
 				<Link VarA="Output^Output_PDS23_1" VarB="FSoE-Drive Out^Used Time stamp" Size="32" OffsA="8"/>
 				<Link VarA="Output^Output_PDS23_1" VarB="FSoE-Drive Out^VMT Challenge" Size="8" OffsA="48"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^PDS23_2">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^PDS23_2">
 				<Link VarA="Input^Input_PDS23_2" VarB="FSoE-Drive In^Actual SBC 1" Size="1" OffsA="161"/>
 				<Link VarA="Input^Input_PDS23_2" VarB="FSoE-Drive In^Actual SBC 2" Size="1" OffsA="289"/>
 				<Link VarA="Input^Input_PDS23_2" VarB="FSoE-Drive In^Actual STO 1" Size="1" OffsA="160"/>
@@ -18590,7 +18467,7 @@
 				<Link VarA="Output^Output_PDS23_2" VarB="FSoE-Drive Out^Used Time stamp" Size="32" OffsA="8"/>
 				<Link VarA="Output^Output_PDS23_2" VarB="FSoE-Drive Out^VMT Challenge" Size="8" OffsA="48"/>
 			</OwnerB>
-			<OwnerB Name="TIID^Device 1 (EtherCAT)^PDS23_3">
+			<OwnerB Name="TIID^Device 2 (EtherCAT)^PDS23_3">
 				<Link VarA="Input^Input_PDS23_3" VarB="FSoE-Drive In^Actual SBC 1" Size="1" OffsA="161"/>
 				<Link VarA="Input^Input_PDS23_3" VarB="FSoE-Drive In^Actual SBC 2" Size="1" OffsA="289"/>
 				<Link VarA="Input^Input_PDS23_3" VarB="FSoE-Drive In^Actual STO 1" Size="1" OffsA="160"/>
@@ -18889,6 +18766,95 @@
 				<Link VarA="Output^Output_PDS23_3" VarB="FSoE-Drive Out^Torque collision level 2" Size="16" OffsA="264"/>
 				<Link VarA="Output^Output_PDS23_3" VarB="FSoE-Drive Out^Used Time stamp" Size="32" OffsA="8"/>
 				<Link VarA="Output^Output_PDS23_3" VarB="FSoE-Drive Out^VMT Challenge" Size="8" OffsA="48"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 4 (EtherCAT)^MFT">
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CONNECTION_ID" Size="16" OffsA="168"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC0" Size="16" OffsA="24"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC1" Size="16" OffsA="56"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC2" Size="16" OffsA="88"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC3" Size="16" OffsA="120"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^CRC4" Size="16" OffsA="152"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^FSOE_CMD"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^FSOE_PUZZLE_ANS" Size="8" OffsA="136"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_00" Size="2" OffsA="16"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_01" Size="2" OffsA="22"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_02" Size="2" OffsA="54"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_03" Size="8" OffsA="144"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_04" Size="1" OffsA="18"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_05" Size="1" OffsA="19"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_06" Size="1" OffsA="20"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RESERVED_07" Size="1" OffsA="21"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_AREA" Size="8" OffsA="80"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_BUSY" Size="1" OffsA="43"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_CMD" Size="4" OffsA="48"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_COMPLETE" Size="1" OffsA="44"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_COUNT" Size="8" OffsA="72"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_DATA" Size="16" OffsA="104"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_DATAVALID" Size="1" OffsA="42"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_COMM" Size="1" OffsA="53"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_READER" Size="1" OffsA="47"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_REFTAG" Size="1" OffsA="46"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_TAGCHANGE" Size="1" OffsA="52"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_ERR_TAGS" Size="1" OffsA="45"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_TAGAVAILIBLE" Size="1" OffsA="40"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^RFID_TAGVALID" Size="1" OffsA="41"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_2" Size="1" OffsA="14"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_3" Size="1" OffsA="15"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_A1" Size="1" OffsA="13"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_ERR_B0" Size="1" OffsA="12"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_2" Size="1" OffsA="10"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_3" Size="1" OffsA="11"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_A1" Size="1" OffsA="9"/>
+				<Link VarA="Input^Input_MFT" VarB="FSoE Inputs^SIND_INPUT_B0" Size="1" OffsA="8"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_APPSWITCH" Size="1" OffsA="5"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT0"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT1" Size="1" OffsA="1"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT2" Size="1" OffsA="2"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT3" Size="1" OffsA="3"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^NSR_INPUT4" Size="1" OffsA="4"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^RESERVED_00" Size="1" OffsA="6"/>
+				<Link VarA="Input^NSR_INPUT" VarB="NSRIOInputs^RESERVED_01" Size="1" OffsA="7"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_INDICATOR_BLUE" Size="1" OffsA="2"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_INDICATOR_GREEN"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_INDICATOR_RED" Size="1" OffsA="1"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^NSR_SUPPLY_OFF" Size="1" OffsA="6"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_05" Size="1" OffsA="3"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_06" Size="1" OffsA="7"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_07" Size="1" OffsA="4"/>
+				<Link VarA="Output^NSR_INDICATOR" VarB="NSRIOOutputs^RESERVED_08" Size="1" OffsA="5"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CONNECTION_ID" Size="16" OffsA="168"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC0" Size="16" OffsA="24"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC1" Size="16" OffsA="56"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC2" Size="16" OffsA="88"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC3" Size="16" OffsA="120"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^CRC4" Size="16" OffsA="152"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^FSOE_Cmd"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_00" Size="4" OffsA="12"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_01" Size="2" OffsA="22"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_02" Size="4" OffsA="40"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_03" Size="1" OffsA="44"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_04" Size="2" OffsA="54"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_05" Size="8" OffsA="144"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_15" Size="1" OffsA="20"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_16" Size="1" OffsA="21"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_17" Size="8" OffsA="136"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_18" Size="1" OffsA="16"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_19" Size="1" OffsA="17"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_20" Size="1" OffsA="18"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RESERVED_21" Size="1" OffsA="19"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_AREA" Size="8" OffsA="80"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_CMD" Size="4" OffsA="48"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_COUNT" Size="8" OffsA="72"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_DATA" Size="16" OffsA="104"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_COMM" Size="1" OffsA="53"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_READER" Size="1" OffsA="47"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_REFTAG" Size="1" OffsA="46"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_TAGCHANGE" Size="1" OffsA="52"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^RFID_ERR_ACK_TAGS" Size="1" OffsA="45"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_2" Size="1" OffsA="10"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_3" Size="1" OffsA="11"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_A1" Size="1" OffsA="9"/>
+				<Link VarA="Output^Output_MFT" VarB="FSoE Outputs^SIND_ERR_ACK_B0" Size="1" OffsA="8"/>
 			</OwnerB>
 			<OwnerB Name="TIXC^ArcLinAxisControl^ArcLinAxisControl">
 				<Link VarA="Data Pointer^fast_control_axis_enable" VarB="motor_interface_out^motor_enable"/>

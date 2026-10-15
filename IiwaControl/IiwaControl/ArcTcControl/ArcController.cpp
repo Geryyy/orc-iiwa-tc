@@ -224,8 +224,15 @@ HRESULT CArcController::SetObjStateSO()
 	m_Trace.Log(tlAlways, FLEAVEA "Init ArcLab Controller");
 	arc_contr_ptr = new robots::Iiwa((unsigned char*)model_binary, model_size, js_param, ts_param, sp_param, fc_param, gc_param, Ts, f_c_slow_norm, m_Trace);
 	if (arc_contr_ptr->get_endeffector_site_id() < 0) {
-		m_Trace.Log(tlError, FENTERA "Body iiwa_link_e could not be found in MuJoCo model!");
-		return EXIT_FAILURE;
+		// Must return a FAILED HRESULT (EXIT_FAILURE == S_FALSE counts as success),
+		// otherwise TwinCAT continues to OP with a half-initialized module and page-faults.
+		m_Trace.Log(tlError, FLEAVEA "Endeffector site '%s' not found in MuJoCo model '%s'! "
+			"It must be defined as <site>, not <body>. Aborting activation.",
+			robots::Iiwa::name_link_e.c_str(), m_Outputs.model_path);
+		delete arc_contr_ptr;
+		arc_contr_ptr = NULL;
+		DeinitDataPointer();
+		return ADS_E_INVALIDPARM;
 	}
 	
 	state_machine_ptr = new logic::StateMachine(&m_Trace, Ts);
