@@ -4528,7 +4528,7 @@
 								<AreaNo AreaType="OutputSrc" CreateSymbols="true">4</AreaNo>
 								<Name>Outputs</Name>
 								<ContextId>1</ContextId>
-								<ByteSize>908</ByteSize>
+								<ByteSize>1001</ByteSize>
 								<Symbol CreateSymbol="true">
 									<Name>q_act</Name>
 									<BitSize>448</BitSize>
@@ -4625,6 +4625,97 @@
 									<BitSize>2048</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</BaseType>
 									<BitOffs>5216</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_rx_us</Name>
+									<DisplayName TxtId=""><![CDATA[Receive: deserialization and queue admission [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7264</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_dynamics_us</Name>
+									<DisplayName TxtId=""><![CDATA[MuJoCo dynamics: M, bias, J, Jdot, EE pose [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7328</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_queue_us</Name>
+									<DisplayName TxtId=""><![CDATA[Handoff drain, reaction supervisor, queue update [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7392</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_interp_ctrl_us</Name>
+									<DisplayName TxtId=""><![CDATA[Interpolator and controller(s) [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7456</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_tx_us</Name>
+									<DisplayName TxtId=""><![CDATA[State/notification serialization [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7520</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_total_us</Name>
+									<DisplayName TxtId=""><![CDATA[ORC compute per cycle: t_cycle_update_us + t_post_cyclic_us [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7584</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_total_max_us</Name>
+									<DisplayName TxtId=""><![CDATA[Maximum of t_total_us since activation [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7648</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>cycle_period_us</Name>
+									<DisplayName TxtId=""><![CDATA[Time since previous CycleUpdate start [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7712</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>rx_handled</Name>
+									<DisplayName TxtId=""><![CDATA[A datagram was handled this cycle]]></DisplayName>
+									<BitSize>8</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+									<BitOffs>7776</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>overrun_count</Name>
+									<DisplayName TxtId=""><![CDATA[Missed task cycles (task cycle start times more than 1.5 Ts apart)]]></DisplayName>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<BitOffs>7784</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_control_s</Name>
+									<DisplayName TxtId=""><![CDATA[ORC control time t (RobotState.time) [s]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7816</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_cycle_update_us</Name>
+									<DisplayName TxtId=""><![CDATA[ArcController CycleUpdate: receive, send, outputs [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7880</BitOffs>
+								</Symbol>
+								<Symbol CreateSymbol="true">
+									<Name>t_post_cyclic_us</Name>
+									<DisplayName TxtId=""><![CDATA[ArcController PostCyclicUpdate: state machine, Robot::update(), outputs [us]]]></DisplayName>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>7944</BitOffs>
 								</Symbol>
 							</DataArea>
 						</DataAreas>
@@ -4918,7 +5009,7 @@
 							</Value>
 							<Value>
 								<Name>client_ip_addr</Name>
-								<Value>3232236035</Value>
+								<Value>3232235779</Value>
 							</Value>
 						</ParameterValues>
 						<InterfacePointerValues>
@@ -5234,6 +5325,46 @@
 					<ProjectVariant PvUseLink="true" PvUseSParameter="1">
 						<Variant>
 							<Name>KUKA_Robot_Controller</Name>
+							<Parameters>
+								<Parameter PID="#x3002103" Data="02000000"/>
+								<Parameter PID="#xa" Data="0000000000004940"/>
+								<Parameter PID="#xb" Data="0000000000005440"/>
+								<Parameter PID="#xd" Data="0000000000004440"/>
+								<Parameter PID="#xc" Data="0000000000004440"/>
+								<Parameter PID="#xe" Data="0000000000002440"/>
+								<Parameter PID="#x25" Data="9a9999999999b93f666666666666e63f0000000000006940000000000000694000000000000000000000000000000000"/>
+								<Parameter PID="#x1d" Data="0000000000000000"/>
+								<Parameter PID="#x22" Data="000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#x1c" Data="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#x10" Data="000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#xf" Data="000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#x21" Data="0300"/>
+								<Parameter PID="#x11" Data="00000000000000c0000000000000004000000000000000c0000000000000004000000000000000c00000000000000040"/>
+								<Parameter PID="#x1a" Data="00"/>
+								<InterfacePtr PID="#x3002060">
+									<OTCID>#x02010020</OTCID>
+								</InterfacePtr>
+								<InterfacePtr PID="#x1">
+									<OTCID>#x02010020</OTCID>
+								</InterfacePtr>
+								<InterfacePtr PID="#x6">
+									<OTCID>#x00000000</OTCID>
+								</InterfacePtr>
+								<InterfacePtr PID="#x7">
+									<OTCID>#x01010010</OTCID>
+								</InterfacePtr>
+								<InterfacePtr PID="#x8">
+									<OTCID>#x02010020</OTCID>
+								</InterfacePtr>
+								<Context>
+									<Id>1</Id>
+									<ManualConfig>
+										<OTCID>#x02010020</OTCID>
+									</ManualConfig>
+									<Priority>1</Priority>
+									<CycleTime>125000</CycleTime>
+								</Context>
+							</Parameters>
 							<IoMapping>
 								<Links>
 									<OwnerA Name="__THIS__">
@@ -6431,46 +6562,6 @@
 									</OwnerA>
 								</Links>
 							</IoMapping>
-							<Parameters>
-								<Parameter PID="#x3002103" Data="02000000"/>
-								<Parameter PID="#xa" Data="0000000000004940"/>
-								<Parameter PID="#xb" Data="0000000000005440"/>
-								<Parameter PID="#xd" Data="0000000000004440"/>
-								<Parameter PID="#xc" Data="0000000000004440"/>
-								<Parameter PID="#xe" Data="0000000000002440"/>
-								<Parameter PID="#x25" Data="9a9999999999b93f666666666666e63f0000000000006940000000000000694000000000000000000000000000000000"/>
-								<Parameter PID="#x1d" Data="0000000000000000"/>
-								<Parameter PID="#x22" Data="000000000000000000000000000000000000000000000000"/>
-								<Parameter PID="#x1c" Data="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
-								<Parameter PID="#x10" Data="000000000000000000000000000000000000000000000000"/>
-								<Parameter PID="#xf" Data="000000000000000000000000000000000000000000000000"/>
-								<Parameter PID="#x21" Data="0300"/>
-								<Parameter PID="#x11" Data="00000000000000c0000000000000004000000000000000c0000000000000004000000000000000c00000000000000040"/>
-								<Parameter PID="#x1a" Data="00"/>
-								<InterfacePtr PID="#x3002060">
-									<OTCID>#x02010020</OTCID>
-								</InterfacePtr>
-								<InterfacePtr PID="#x1">
-									<OTCID>#x02010020</OTCID>
-								</InterfacePtr>
-								<InterfacePtr PID="#x6">
-									<OTCID>#x00000000</OTCID>
-								</InterfacePtr>
-								<InterfacePtr PID="#x7">
-									<OTCID>#x01010010</OTCID>
-								</InterfacePtr>
-								<InterfacePtr PID="#x8">
-									<OTCID>#x02010020</OTCID>
-								</InterfacePtr>
-								<Context>
-									<Id>1</Id>
-									<ManualConfig>
-										<OTCID>#x02010020</OTCID>
-									</ManualConfig>
-									<Priority>1</Priority>
-									<CycleTime>125000</CycleTime>
-								</Context>
-							</Parameters>
 						</Variant>
 						<Variant>
 							<Name>Robot_frame</Name>

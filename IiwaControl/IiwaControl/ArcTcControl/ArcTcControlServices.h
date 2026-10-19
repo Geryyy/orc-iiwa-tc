@@ -131,6 +131,8 @@ typedef struct _ArcControllerOutputs
 	bool rx_handled;
 	ULONG overrun_count;
 	double t_control_s;
+	double t_cycle_update_us;
+	double t_post_cyclic_us;
 } ArcControllerOutputs, *PArcControllerOutputs;
 #pragma pack(pop)
 

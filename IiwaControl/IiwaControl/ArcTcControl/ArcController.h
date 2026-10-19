@@ -87,6 +87,7 @@ protected:
 	LONGLONG tick_cycle_start = 0;
 	LONGLONG tick_prev_cycle_start = 0;
 	LONGLONG tick_tx_start = 0;
+	LONGLONG prev_sys_time = 0; // task cycle start (GetCurrentSysTime), for deadline misses
 
 	orc::log::Logger arc_log;
 	orc::robots::Iiwa::IiwaContrParam arc_contr_param;
