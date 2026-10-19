@@ -200,6 +200,11 @@ HRESULT CArcController::SetObjStateSO()
 	// current time
 	t = 0.0;
 
+	// cycle timing
+	tick_prev_cycle_start = 0;
+	m_Outputs.t_total_max_us = 0.0;
+	m_Outputs.overrun_count = 0;
+
 	// read cycle time from TcCom Module Parameter
 	Ts = m_Ts;
 	m_Trace.Log(tlAlways, FLEAVEA "Cycle Time Ts = %f", Ts);
@@ -309,16 +314,26 @@ HRESULT CArcController::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG
 	hr = FAILED(hr) ? hr : ipTask->GetCycleTime(&TaskCycleTime);
 	Ts = ((double)TaskCycleTime) / ((double)1e9);
 	orc::log::start_timing(ipTask);
+	orc::log::tic(&tick_cycle_start);
+	m_Outputs.cycle_period_us = tick_prev_cycle_start != 0 ? (tick_cycle_start - tick_prev_cycle_start) / 10.0 : 0.0;
+	tick_prev_cycle_start = tick_cycle_start;
 
 	// current time
 	t += Ts;
+	m_Outputs.t_control_s = t.toSec();
 
 	/* UDP input*/
 
+	m_Outputs.rx_handled = false;
+	m_Outputs.t_rx_us = 0.0;
 	if (m_spudp_rx_msg != NULL) {
 		if (m_spudp_rx_msg->request) {
 			m_spudp_rx_msg->request = false;
+			LONGLONG tick_rx_start;
+			orc::log::tic(&tick_rx_start);
 			orc::com::handle_receive(*arc_contr_ptr, &(m_spudp_rx_msg->data[0]), m_spudp_rx_msg->size, t);
+			m_Outputs.t_rx_us = orc::log::toc(tick_rx_start);
+			m_Outputs.rx_handled = true;
 		}
 	}
 
@@ -326,8 +341,10 @@ HRESULT CArcController::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG
 	/* UDP output */
 	if (m_spudp_tx_msg != NULL) {
 		m_spudp_tx_msg->request = true;
+		orc::log::tic(&tick_tx_start);
 		auto msg_size = orc::com::send_robot_data_or_notification(*arc_contr_ptr, t, state_machine_ptr->get_state(), arc_contr_ptr->get_model_id(), m_spudp_tx_msg->data, sizeof(m_spudp_tx_msg->data));
 		m_spudp_tx_msg->size = msg_size;
+		m_Outputs.t_tx_us = orc::log::toc(tick_tx_start);
 	}
 
 	/* set outputs */
@@ -476,6 +493,18 @@ HRESULT CArcController::PostCyclicUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, 
 	for (int i = 0; i < sizeof(m_robot_interface_out.motor_enable.Values) / sizeof(double); i++) {
 		m_robot_interface_out.motor_enable.Values[i] = motor_enable;
 	}
+
+	// cycle timing: update() phases and the full module pipeline of this cycle
+	const auto& ut = arc_contr_ptr->update_timing;
+	m_Outputs.t_dynamics_us = (ut.dynamics_done - ut.start) / 10.0;
+	m_Outputs.t_queue_us = (ut.queue_done - ut.dynamics_done) / 10.0;
+	m_Outputs.t_interp_ctrl_us = (ut.end - ut.queue_done) / 10.0;
+	m_Outputs.t_total_us = orc::log::toc(tick_cycle_start);
+	if (m_Outputs.t_total_us > m_Outputs.t_total_max_us)
+		m_Outputs.t_total_max_us = m_Outputs.t_total_us;
+	const double Ts_us = Ts.toSec() * 1e6;
+	if (m_Outputs.t_total_us > Ts_us || m_Outputs.cycle_period_us > 1.5 * Ts_us)
+		m_Outputs.overrun_count++;
 	
 	return hr;
 }

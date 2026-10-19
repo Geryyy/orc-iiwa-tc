@@ -6438,10 +6438,13 @@
 								<Parameter PID="#xd" Data="0000000000004440"/>
 								<Parameter PID="#xc" Data="0000000000004440"/>
 								<Parameter PID="#xe" Data="0000000000002440"/>
-								<Parameter PID="#x18" Data="0000000000000000"/>
-								<Parameter PID="#x19" Data="0000000000000000"/>
-								<Parameter PID="#xf" Data="000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#x25" Data="9a9999999999b93f666666666666e63f0000000000006940000000000000694000000000000000000000000000000000"/>
+								<Parameter PID="#x1d" Data="0000000000000000"/>
+								<Parameter PID="#x22" Data="000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#x1c" Data="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"/>
 								<Parameter PID="#x10" Data="000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#xf" Data="000000000000000000000000000000000000000000000000"/>
+								<Parameter PID="#x21" Data="0300"/>
 								<Parameter PID="#x11" Data="00000000000000c0000000000000004000000000000000c0000000000000004000000000000000c00000000000000040"/>
 								<Parameter PID="#x1a" Data="00"/>
 								<InterfacePtr PID="#x3002060">
@@ -8549,7 +8552,7 @@
 							</Value>
 							<Value>
 								<Name>WorkspaceLimitPreset</Name>
-								<EnumText>full</EnumText>
+								<EnumText>custom</EnumText>
 							</Value>
 							<Value>
 								<Name>CustomWorkspaceLimits[0]</Name>

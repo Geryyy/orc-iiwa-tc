@@ -83,6 +83,11 @@ protected:
 	Time Ts;
 	Time t;
 
+	// Cycle timing (orc::log::tic() ticks, 100 ns), published in m_Outputs
+	LONGLONG tick_cycle_start = 0;
+	LONGLONG tick_prev_cycle_start = 0;
+	LONGLONG tick_tx_start = 0;
+
 	orc::log::Logger arc_log;
 	orc::robots::Iiwa::IiwaContrParam arc_contr_param;
 	orc::robots::Iiwa* arc_contr_ptr;

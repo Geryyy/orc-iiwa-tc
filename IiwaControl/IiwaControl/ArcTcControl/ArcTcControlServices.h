@@ -120,6 +120,17 @@ typedef struct _ArcControllerOutputs
 	bool ts_traj_active;
 	SHORT ncon;
 	STRING255 model_path;
+	double t_rx_us;
+	double t_dynamics_us;
+	double t_queue_us;
+	double t_interp_ctrl_us;
+	double t_tx_us;
+	double t_total_us;
+	double t_total_max_us;
+	double cycle_period_us;
+	bool rx_handled;
+	ULONG overrun_count;
+	double t_control_s;
 } ArcControllerOutputs, *PArcControllerOutputs;
 #pragma pack(pop)
 
