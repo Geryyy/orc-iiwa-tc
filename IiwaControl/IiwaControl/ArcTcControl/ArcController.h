@@ -107,4 +107,11 @@ protected:
 	HRESULT readBinaryModel(PCCH fileName);
 
 	UINT counter;
+
+	// Operator surfacing of ORC reaction events and command results (see
+	// ArcController.cpp). Fixed-size, allocation-free, cyclic only.
+	BYTE prev_reaction_event_state = 0;
+	VOID SurfaceReceipt(orc::trajectory::AdmissionResult result);
+	VOID SurfaceNotification(const uint8_t* data, size_t size);
+	VOID ResetSurfacing();
 };

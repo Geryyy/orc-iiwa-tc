@@ -134,6 +134,22 @@ typedef struct _ArcControllerOutputs
 	double t_control_s;
 	double t_cycle_update_us;
 	double t_post_cyclic_us;
+	BYTE reaction_state;
+	BYTE reaction_trigger;
+	BYTE reaction_policy;
+	BYTE reaction_event_state;
+	ULONG reaction_event_seq;
+	ULONG reaction_events_dropped;
+	ULONG comm_timeout_count;
+	bool comm_watchdog_armed;
+	double comm_timeout_active_s;
+	BYTE rx_result;
+	BYTE rx_last_reject;
+	ULONG rx_rejected_count;
+	BYTE fbk_kind;
+	BYTE fbk_result;
+	BYTE fbk_last_reject;
+	ULONG fbk_rejected_count;
 } ArcControllerOutputs, *PArcControllerOutputs;
 #pragma pack(pop)
 
