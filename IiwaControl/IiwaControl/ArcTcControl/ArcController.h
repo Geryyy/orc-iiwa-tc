@@ -68,6 +68,7 @@ protected:
 	STRING127 m_CustomMujocoModelPath;
 	bool m_singular_perturbation_enable;
 	bool m_friction_compensation_enable;
+	double m_comm_timeout_s;
 	ArcControllerInputs m_Inputs;
 	ArcControllerrobot_interface_in m_robot_interface_in;
 	ArcControllerrobot_interface_out m_robot_interface_out;

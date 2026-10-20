@@ -18,6 +18,7 @@ const PTCID PID_ArcControllerMujocoModel = 0x0000000E;
 const PTCID PID_ArcControllerCustomMujocoModelPath = 0x00000007;
 const PTCID PID_ArcControllersingular_perturbation_enable = 0x00000001;
 const PTCID PID_ArcControllerfriction_compensation_enable = 0x00000005;
+const PTCID PID_ArcControllercomm_timeout_s = 0x0000000F;
 const PTCID PID_ArcControllerPostCyclic = 0x00000002;
 const PTCID PID_ArcControllerudp_tx_msg = 0x00000003;
 const PTCID PID_ArcControllerudp_rx_msg = 0x00000004;
